@@ -1,5 +1,5 @@
 function setup() {
-	createCanvas(windowWidth, windowHeight);
+	createCanvas(windowWidth, windowHeight, WEBGL);
 }
 
 function windowResized() {
@@ -8,25 +8,32 @@ function windowResized() {
 
 function draw() {
 	background(0);	
-	translate(width/2, height/2);
-	drawDotSphere(100, 100);	
+	
+	drawDotSphere(50, 400, 2);	
 }
 
-function drawDotSphere(scl, r) {
-	var scl = 20;
-    var step = 1;
+function drawDotSphere(scl, r, step) {
         noFill();
         stroke(255);
         var i = 0;
         for (var x = 0; x < scl; x+=step) {
+			beginShape(TRIANGLE_STRIP);
             for (var y = 0; y <= scl; y+=step) {
                 var myR = r;
-                var n = noise(abs(x/2-x)*.1, y*.1, radians(frameCount/8));
+				var myR1 = r;
+                var n = noise(x*.1, 		y*.1, radians(frameCount/8.0));
+				var n1 = noise(x+step*.1, y*.1, radians(frameCount/8.0));
                 myR += n*50;
-                stroke(255,100);
+				myR1 += n1*50;
+                stroke(255);				
+				noFill();
+				strokeWeight(1);
                 var v0 = getPointOnSphere(x, y, scl, scl, myR);                
-                point(v0.x, v0.y, v0.z);
+                var v1 = getPointOnSphere(x+step, y, scl, scl, myR1);                
+                vertex(v0.x, v0.y, v0.z);
+                vertex(v1.x, v1.y, v1.z);
             }
+			endShape();
         }
     }
 	
