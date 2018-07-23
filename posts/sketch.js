@@ -1,6 +1,5 @@
 function setup() {
 	createCanvas(windowWidth, windowHeight);
-	cnv.style('display', 'block');
 }
 
 function windowResized() {
