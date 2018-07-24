@@ -1,5 +1,6 @@
 function setup() {
 	createCanvas(windowWidth, windowHeight, WEBGL);
+	easycam = createEasyCam();
 }
 
 function windowResized() {
@@ -9,27 +10,35 @@ function windowResized() {
 function draw() {
 	background(0);	
 	
-	drawDotSphere(50, 400, 2);	
+	drawDotSphere(10, 100, 1);	
 }
+
+let x0;
 
 function drawDotSphere(scl, r, step) {
         noFill();
         stroke(255);
         var i = 0;
-        for (var x = 0; x < scl; x+=step) {
+		for (var y = 0; y < scl; y+=step) {        
 			beginShape(TRIANGLE_STRIP);
-            for (var y = 0; y <= scl; y+=step) {
+            for (var x = 0; x <= scl; x+=step) {
                 var myR = r;
 				var myR1 = r;
                 var n = noise(x*.1, 		y*.1, radians(frameCount/8.0));
-				var n1 = noise(x+step*.1, y*.1, radians(frameCount/8.0));
-                myR += n*50;
-				myR1 += n1*50;
+				var n1 = noise(x*.1, (y+step)*.1, radians(frameCount/8.0));
+                myR += n*30;
+				myR1 += n1*30;
                 stroke(255);				
 				noFill();
 				strokeWeight(1);
                 var v0 = getPointOnSphere(x, y, scl, scl, myR);                
-                var v1 = getPointOnSphere(x+step, y, scl, scl, myR1);                
+                var v1 = getPointOnSphere(x, y+step, scl, scl, myR1);     
+				if (x === 0){
+					x0 = v0;
+				}
+				if (x === scl){
+					v1 = x0;
+				}					
                 vertex(v0.x, v0.y, v0.z);
                 vertex(v1.x, v1.y, v1.z);
             }
