@@ -6,6 +6,7 @@ function setup() {
 	colorMode(HSB, 255,255,255);
 	createCanvas(windowWidth, windowHeight);
 	background(0);
+	noSmooth();
 	mouseX = windowWidth/3;
 	mouseY = windowHeight/3;
 }
