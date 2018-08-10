@@ -19,7 +19,7 @@ function draw() {
 	stroke(255);
 
 	noFill();
-	var greatside = 180;
+	var greatside = 200;
 	var side = greatside/12;
 	for(var x = 0; x < greatside; x+= side){
 		for(var y =0; y < greatside; y+= side){
