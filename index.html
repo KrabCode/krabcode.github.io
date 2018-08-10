@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>hello world</title>
+<title>krabcode</title>
 </head>
+
 <header>
 <p><a href="https://krabcode.github.io/posts/1/post">hello world</a></p>
 <p><a href="https://krabcode.github.io/posts/2/post">perlin planet</a></p>
 <p><a href="https://krabcode.github.io/posts/3/post">animated sinewave</a></p>
 <p><a href="https://krabcode.github.io/posts/4/post">kitten</a></p>
 </header>
+
 <body>
 <script src="sketch.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
@@ -20,15 +22,19 @@ html, body {
 body {
   margin: 0;
   display: flex;
-
-  /* This centers our sketch horizontally. */
   justify-content: center;
-
-  /* This centers our sketch vertically. */
   align-items: center;
+}
+
+header {
+	justify-content: center;
+	align-items: center;
+    position: absolute;
+    z-index: 1;
 }
 
 </style>
 
 </body>
+
 </html>
