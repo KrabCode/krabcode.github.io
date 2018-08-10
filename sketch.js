@@ -18,8 +18,9 @@ function draw() {
 	for(var x = -scl+frameCount%scl; x < width; x += scl){
 		for(var y = 0; y < height; y += scl){
 			var d = dist(mouseX, mouseY, x, y);
-			var size = map(d, 0, width, scl, 0);
-			rect(x, y, size, size);
+			//var size = map(d, 0, width, scl, 0);
+			fill(d%255, 50, 255);
+			rect(x, y, scl, scl);
 		}
 	}
 }
