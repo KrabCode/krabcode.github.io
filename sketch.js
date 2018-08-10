@@ -15,7 +15,7 @@ function draw() {
 	rectMode(CENTER);
 	noStroke();
 	var scl = width / 50;
-	for(var x = -scl+frameCount%scl; x < width; x += scl){
+	for(var x = -scl+frameCount%scl; x < width+scl; x += scl){
 		for(var y = 0; y < height; y += scl){
 			var d = dist(mouseX, mouseY, x, y);
 			//var size = map(d, 0, width, scl, 0);
