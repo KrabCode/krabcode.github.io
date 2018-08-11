@@ -161,9 +161,7 @@ function updatePlayer(){
 
 function drawPlayer(){
 	push();
-
 	var elev = getElev(player.x, player.y);
-
 	playerSphereVector = getPointOnSphere(player.x, player.y, planetDetail, planetDetail, planetR+elev);
 	translate(playerSphereVector.x,playerSphereVector.y,playerSphereVector.z);
   noFill();
