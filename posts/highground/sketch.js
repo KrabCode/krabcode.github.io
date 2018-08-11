@@ -1,8 +1,8 @@
 let planet;
-let planetR = 400;
-let seaR = 		400;
-let planetDetail = 15;
-let planetMtnHeight = 75;
+let planetR = 200;
+let seaR = 		200;
+let planetDetail = 10;
+let planetMtnHeight = 150;
 
 
 
@@ -35,10 +35,8 @@ function setup() {
 	createCanvas(windowWidth, windowHeight, WEBGL);
   setAttributes('antialias', true);
 	background(0);
-	// easycam = createEasyCam();
 	beachHue = color(50, 150, 200);
 	mountHue = color(255, 150, 50);
-
 	center = createVector(planetDetail/4, planetDetail/2);
 	player = createVector(planetDetail/4, planetDetail/2);
 	highestPoint = createVector();
@@ -49,9 +47,9 @@ function setup() {
 	for(var i = 0; i < planetDetail; i++){
 		planet[i] = new Array(planetDetail);
 	}
-
 	drawPlanet();
 }
+
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
@@ -157,11 +155,21 @@ function updatePlayer(){
 	}
 	player.add(playerSpd);
 	playerSpd.mult(.85);
+
+	if(player.x < 0) player.x += planetDetail;
+	if(player.x >= planetDetail) player.x -= planetDetail;
+	if(player.y < 0) player.y += planetDetail;
+	if(player.y >= planetDetail) player.y -= planetDetail;
+
 }
 
 function drawPlayer(){
 	push();
-	var elev = getElev(player.x, player.y);
+	var elev = playerR/2+getElev(player.x, player.y) ;
+	if(elev < playerR/2 ){
+		elev = playerR/2;
+	}
+	print(elev);
 	playerSphereVector = getPointOnSphere(player.x, player.y, planetDetail, planetDetail, planetR+elev);
 	translate(playerSphereVector.x,playerSphereVector.y,playerSphereVector.z);
   noFill();
@@ -189,7 +197,7 @@ function getElev(x,y){
 	let noiseScl = .5;
 	var elev = (noise(x*noiseScl,y*noiseScl, radians(frameCount/16))*planetMtnHeight*2)-planetMtnHeight;
 	var d = dist(x,y,center.x, center.y) ;
-	elev -= d*5;
+	elev -= d*.5;
 	if(elev < -planetMtnHeight){
 		elev = -planetMtnHeight;
 	}
