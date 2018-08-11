@@ -7,6 +7,10 @@ function setup() {
 
 	easycam = createEasyCam();
 	background(0);
+	
+}
+
+function preload(){
 	kitten = loadImage("https://krabcode.github.io/posts/kitten/kitten.jpg");
 }
 
