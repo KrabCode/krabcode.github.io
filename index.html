@@ -7,24 +7,45 @@
   <h2>Krab</h2>
 </header>
 
-<div>
+<div class="row">
+  <div class="column">
+    <a href="https://krabcode.github.io/posts/sinewave/post"><img src="https://krabcode.github.io/screens/sine.jpg" style="width:82px; height:86px" title="White flower" alt="Flower"></a>
+    <a href="https://krabcode.github.io/posts/rabbit/post"><img src="https://krabcode.github.io/screens/rabbitscr.jpg" style="width:82px; height:86px" title="White flower" alt="Flower"></a>
+    <a href="https://krabcode.github.io/posts/recrec/post"><img src="https://krabcode.github.io/screens/recrec.jpg" style="width:82px; height:86px" title="White flower" alt="Flower"></a>
+    <a href="https://krabcode.github.io/posts/honeycomb/post"><img src="https://krabcode.github.io/screens/honey.png" style="width:82px; height:86px" title="White flower" alt="Flower"></a>
+
+  </div>
+</div>
+
+<!--
   <p><a href="https://krabcode.github.io/posts/sinewave/post">animated sinewave</a></p>
   <p><a href="https://krabcode.github.io/posts/rabbit/post">rabbit</a></p>
   <p><a href="https://krabcode.github.io/posts/recrec/post">recursive rectangle</a></p>
   <p><a href="https://krabcode.github.io/posts/honeycomb/post">honeycomb</a></p>
-</div>
+-->
 
 <footer>
 <p><a href="https://github.com/KrabCode">github</a> | <a href="https://www.reddit.com/user/Simplyfire">reddit</a> | <a href="https://play.google.com/store/apps/developer?id=Krabcode">android</a></p>
 </footer>
 
 <body>
-<script src="sketch.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
 <style>
 
-html, body {
-  height: 100%;
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create two equal columns that sits next to each other */
+.column {
+  flex: 50%;
+  padding: 0 4px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
 }
 
 h2{
