@@ -11,7 +11,7 @@ function setup() {
 }
 
 function preload(){
-	rabbit = loadImage("https://github.com/KrabCode/krabcode.github.io/blob/master/posts/rabbit/rabbit.jpg?raw=true");
+	rabbit = loadImage("https://krabcode.github.io/posts/rabbit/rabbit.jpg");
 }
 
 function windowResized() {
