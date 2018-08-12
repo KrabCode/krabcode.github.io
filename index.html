@@ -3,24 +3,36 @@
 <head>
 <title>krabcode</title>
 </head>
-
 <header>
-  <h2>krabcode</a></h2>
-  <br>
-  <div>
-    <p><a href="https://krabcode.github.io/posts/sinewave/post">animated sinewave</a></p>
-	<p><a href="https://krabcode.github.io/posts/rabbit/post">rabbit</a></p>
-    <p><a href="https://krabcode.github.io/posts/recrec/post">recursive rectangle</a></p>
-    <p><a href="https://krabcode.github.io/posts/honeycomb/post">honeycomb</a></p>	
-  </div>
+  <h2>KrabCode</h2>
 </header>
+
+<div>
+  <p><a href="https://krabcode.github.io/posts/sinewave/post">animated sinewave</a></p>
+  <p><a href="https://krabcode.github.io/posts/rabbit/post">rabbit</a></p>
+  <p><a href="https://krabcode.github.io/posts/recrec/post">recursive rectangle</a></p>
+  <p><a href="https://krabcode.github.io/posts/honeycomb/post">honeycomb</a></p>
+</div>
+
+<footer>
+<h3><a href="https://github.com/KrabCode">my repos</a></h3>
+</footer>
 
 <body>
 <script src="sketch.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
 <style>
+
 html, body {
   height: 100%;
+}
+
+h2{
+  margin: 0;
+  display: flex;
+  font-size: 80px;
+  justify-content: center;
+  align-items: center;
 }
 
 body {
@@ -28,7 +40,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 30px;
 }
 
 header {
@@ -36,20 +47,29 @@ header {
 	align-items: center;
   position: absolute;
   z-index: 1;
-  font-size: 50px;
-  top:0px;
+  font-size: 100px;
+  top:40px;
+}
+
+footer{
+  justify-content: center;
+	align-items: center;
+  position: absolute;
+  z-index: 1;
+  bottom: 10px;
+  font-size: 20px;
+
 }
 
 div {
   justify-content: center;
 	align-items: center;
-  position: relative;
+  position: absolute;
   z-index: 1;
   font-size: 30px;
+  top:140px;
 }
 
 </style>
-
-
 </body>
 </html>
