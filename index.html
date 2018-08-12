@@ -14,6 +14,15 @@
   <p><a href="https://krabcode.github.io/posts/honeycomb/post">honeycomb</a></p>
 </div>
 
+<div class="row">
+  <div class="column">
+    <img src="https://krabcode.github.io/screens/honey.jpg">
+    <img src="https://krabcode.github.io/screens/rabbitscr.jpg">
+    <img src="https://krabcode.github.io/screens/recrec.jpg">
+    <img src="https://krabcode.github.io/screens/sine.jpg">
+  </div>
+</div>
+
 <footer>
 <p><a href="https://github.com/KrabCode">github</a> | <a href="https://www.reddit.com/user/Simplyfire">reddit</a> | <a href="https://play.google.com/store/apps/developer?id=Krabcode">android</a></p>
 </footer>
@@ -68,6 +77,40 @@ div {
   z-index: 1;
   font-size: 30px;
   top:140px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    flex: 100%;
+    max-width: 100%;
+  }
 }
 
 </style>
