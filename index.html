@@ -4,67 +4,44 @@
 <title>krabcode</title>
 </head>
 
-
 <header>
   <h2>Krab</h2>
-
-
+  <a href="https://github.com/KrabCode">github</a> | <a href="https://www.reddit.com/user/Simplyfire">reddit</a> | <a href="https://play.google.com/store/apps/developer?id=Krabcode">android</a>
 </header>
 
-<footer>
-  <p><a href="https://github.com/KrabCode">github</a> | <a href="https://www.reddit.com/user/Simplyfire">reddit</a> | <a href="https://play.google.com/store/apps/developer?id=Krabcode">android</a></p>
-</footer>
-
-<div class="row">
-  <div class="column">
-    <a href="https://krabcode.github.io/posts/sinewave/post"><img src="https://krabcode.github.io/screens/sine.jpg"     style="width:240px; height:160px" title="sinewave" alt="sinewave"></a>
-    <a href="https://krabcode.github.io/posts/rabbit/post"><img src="https://krabcode.github.io/screens/rabbitscr.jpg"  style="width:240px; height:160px" title="rabbit" alt="rabbit"></a>
-    <a href="https://krabcode.github.io/posts/recrec/post"><img src="https://krabcode.github.io/screens/recrec.jpg"     style="width:240px; height:160px" title="recursive rectangles" alt="recursive rectangles"></a>
-    <a href="https://krabcode.github.io/posts/honeycomb/post"><img src="https://krabcode.github.io/screens/honey.jpg"   style="width:240px; height:160px" title="honeycomb" alt="honeycomb"></a>
-
-</div>
-
-
 <body>
+    <div class=floated_img>
+        <a href="https://krabcode.github.io/posts/honeycomb/post"><img src="https://krabcode.github.io/screens/honey.jpg"  title="Honeycomb" alt="Honeycomb"></a>
+        <p>Honeycomb</p>
+    </div>
+    <div class=floated_img>
+      <a href="https://krabcode.github.io/posts/rabbit/post"><img src="https://krabcode.github.io/screens/rabbitscr.jpg"   title="Rabbit" alt="Rabbit"></a>
+        <p>Rabbit</p>
+    </div>
+    <div class=floated_img>
+      <a href="https://krabcode.github.io/posts/sinewave/post"><img src="https://krabcode.github.io/screens/sine.jpg"  title="Sinewave" alt="Sinewave"></a>
+        <p>Sinewave</p>
+    </div>
+    <div class=floated_img>
+      <a href="https://krabcode.github.io/posts/recrec/post"><img src="https://krabcode.github.io/screens/recrec.jpg" title="Recursive rectangles" alt="Recursive rectangles"></a>
+        <p>Recursive rectangles</p>
+    </div>
 
 <style>
 
 
 
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 4px;
-}
-
-/* Create two equal columns that sits next to each other */
-.column {
-  flex: 50%;
-  padding: 0 4px;
-}
-
-.column img {
-  margin-top: 8px;
-  vertical-align: middle;
-}
-
 html, body {
-  margin: 0;
-  padding: 0;
+  background-image: url("");
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-top: 100px;
 }
-
 
 h2{
   margin: 0;
   display: flex;
   font-size: 80px;
-  justify-content: center;
-  align-items: center;
-}
-
-body {
-  margin: 0;
-  display: flex;
   justify-content: center;
   align-items: center;
 }
@@ -77,23 +54,23 @@ header {
   top:40px;
 }
 
-footer{
-  justify-content: bottom;
-	align-items: bottom;
-  position: absolute;
-  z-index: 1;
-  bottom: 10px;
-  font-size: 20px;
+img{
+  width:240px;
+  height:240px;
 }
 
-div {
-  justify-content: center;
-	align-items: center;
-  position: absolute;
-  z-index: 1;
-  font-size: 30px;
-  top:100px;
+p{
+  width:240px;
+  height:40px;
 }
+
+
+.floated_img
+{
+    float: left;
+    padding: 5px;
+}
+
 </style>
 
 </body>
