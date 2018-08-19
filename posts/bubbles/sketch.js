@@ -71,9 +71,13 @@ function P(){
 	this.sat = random(.2,1);
 
 	this.updateParticle = function(p){
+		//apply acceleration in a random direction decided by noise
 		var a = getAngleAt(this.pos.x, this.pos.y);
 		this.acc.add(p5.Vector.fromAngle(a).div(this.m));
 
+		//apply acceleration in the same direction as the mouse,
+		//apply it less on more massive objects
+		//the force get smaller with the square of the distance from the mouse
 		if(mouseIsPressed){
 			 var ma = angle(pmouseX, pmouseY, mouseX, mouseY);
 			 var mm = dist(mouseX, mouseY, pmouseX, pmouseY);
@@ -99,10 +103,6 @@ function P(){
 		point(this.pos.x,this.pos.y);
 	}
 }
-
-
-
-
 
 function angle(x0, y0, x1, y1){
     return atan2(y1 - y0, x1 - x0);

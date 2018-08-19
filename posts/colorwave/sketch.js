@@ -17,7 +17,7 @@ function setup() {
 	hdtl = round(h/35);
 	wscl = (w+2*(w/wdtl))/wdtl;
 	hscl = (h+2*(h/hdtl))/hdtl;
-	
+
 	b1 = new Array();
 	for(var i = 0; i < wdtl; i++){
 		b1[i] = new Array(hdtl);
@@ -25,7 +25,7 @@ function setup() {
 			b1[i][j] = 0;
 		}
 	}
-	
+
 	b2 = new Array();
 	for(var i = 0; i < wdtl; i++){
 		b2[i] = new Array(hdtl);
@@ -43,17 +43,17 @@ function draw() {
 function updateGrid() {
   for (var x = 0; x < wdtl; x++) {
     for (var y = 0; y < hdtl; y++) {
-      if (x == 0 || x == wdtl-1 || 
+      if (x == 0 || x == wdtl-1 ||
         y == 0 || y == hdtl-1 ) {
         b2[x][y] *= damping;
         continue;
       }
       b2[x][y]=  (
         ( b1[x+1][y]
-        + b1[x-1][y] 
-        + b1[x][y+1] 
+        + b1[x-1][y]
+        + b1[x][y+1]
         + b1[x][y-1]
-        ) / 2 
+        ) / 2
         - b2[x][y]
         ) * damping;
     }
@@ -73,8 +73,8 @@ function drawGrid() {
       var v = b2[x][y];
       stroke(.47+v, 1, v*20);
 	  translate(x*wscl, y*hscl);
-      line(-wscl/2,0, wscl/2, 0);
-	  line(0,-hscl/2,0, hscl/2);
+    line(-wscl/4,0, wscl/4, 0);
+	  line(0,-hscl/4,0, hscl/4);
 	  pop();
     }
   }
