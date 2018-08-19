@@ -1,5 +1,5 @@
 let ps;
-var pCount = 256;
+var pCount = 512;
 var minm = 16;
 var maxm = 64;
 var bgalpha = .2;
