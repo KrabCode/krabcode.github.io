@@ -1,8 +1,8 @@
 let ps;
-var pCount = 512;
+var pCount = 256;
 var minm = 16;
 var maxm = 64;
-var bgalpha = .1;
+var bgalpha = .2;
 var fgalpha = .5;
 var w,h;
 
@@ -70,7 +70,7 @@ function P(){
 	this.hue = map(this.m,minm,maxm,.65,1);
 	this.sat = random(.2,1);
 
-	this.updateParticle = function(p){
+	this.updateParticle = function(){
 		//apply acceleration in a random direction decided by noise
 		var a = getAngleAt(this.pos.x, this.pos.y);
 		this.acc.add(p5.Vector.fromAngle(a).div(this.m));
@@ -97,7 +97,7 @@ function P(){
 		this.drawParticle();
 	}
 
-	this.drawParticle = function(p){
+	this.drawParticle = function(){
 		strokeWeight(this.m);
 		stroke(this.hue,this.sat,1,fgalpha);
 		point(this.pos.x,this.pos.y);
