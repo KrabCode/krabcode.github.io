@@ -15,7 +15,9 @@ function setup() {
 
 	ps = new Array(pCount);
   for(var i = 0; i < pCount; i++){
-      ps[i] = new P();
+			var p = new P();
+			p.z = map(i, 0, pCount, .4, 1);
+      ps[i] = p;
   }
 }
 
@@ -94,12 +96,13 @@ function P(){
 		if(this.pos.x > w+this.m*2) this.pos.x-=w+this.m*4;
 		if(this.pos.y <  -this.m*2) this.pos.y+=h+this.m*4;
 		if(this.pos.y > h+this.m*2) this.pos.y-=h+this.m*4;
+
 		this.drawParticle();
 	}
 
 	this.drawParticle = function(){
 		strokeWeight(this.m);
-		stroke(this.hue,this.sat,1,fgalpha);
+		stroke(this.hue,this.sat,this.z,fgalpha);
 		point(this.pos.x,this.pos.y);
 	}
 }
