@@ -1,7 +1,7 @@
 function setup() {
 	createCanvas(windowWidth, windowHeight, WEBGL);
 	colorMode(HSB, 255,255,255,255);
-	easycam = createEasyCam();
+	easycam = new Dw.EasyCam(this._renderer, {distance : windowWidth}); 
 }
 
 function draw(){
