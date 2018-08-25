@@ -39,7 +39,7 @@ function draw(){
 			//512 and 200 are not set in stone, feel free to play with them to get different gradients, for example I like the final hue range between 130 and 200 a lot for this sketch too
 
 			//so now that we know everything about this box we're about to draw, let's draw it
-			push(); //push a new matrix on the matrix stack because I want to be able to go back where I came from I was really easily
+			push(); //push a new matrix on the matrix stack because I want to be able to go back where I came from really easily
 	    translate(x,y); //move the matrix to my box position
 	    noStroke(); //outlines slow this down a lot, we don't need them anyhow
 	    fill(h, 150, 255); //fill the boxes with a color of the hue, desaturate it a tiny bit (150) and give it full brightness (255)
