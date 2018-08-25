@@ -35,16 +35,16 @@ function draw(){
 			//seeing as d and td are both in the 0-1 range the multiplied values will also never exit the 0-1 range
 			//this fact allows me to map this to any other range I want really easily.
 			//I map it to a range of 0-512 just because I played with it for a while and this looked pretty I guess
-			//%200 means there's a hue range between 200 and 255 I'm not interested in and would rather loop back to 1 -
-			//512 and 200 are not set in stone, feel free to play with them to get different gradients, for example I like the range between 130 and 200 a lot for this sketch too
+			//%200 means there's a hue range between 200 and 255 I'm not interested in and would rather loop back to 1
+			//512 and 200 are not set in stone, feel free to play with them to get different gradients, for example I like the final hue range between 130 and 200 a lot for this sketch too
 
-			//so now that we know everything about this box we're about to draw, we just draw it :)
-			push(); //push this place on the matrix stack because I want to forget where I was really easily. this could also be achieved with
+			//so now that we know everything about this box we're about to draw, let's draw it
+			push(); //push a new matrix on the matrix stack because I want to be able to go back where I came from I was really easily
       translate(x,y); //move the matrix to my box position
       noStroke(); //outlines slow this down a lot, we don't need them anyhow
       fill(h, 150, 255); //fill the boxes with a color of the hue, desaturate it a tiny bit (150) and give it full brightness (255)
       box(scl, scl, zscl); //draw the box, two of its sides will always be the same, only the height changes
-			pop(); //forget where I was. this would also work without push and pop by calling translate(-x-y) here but whatevs, push and pop are really comfy to use
+			pop(); //return to whence I came. this would also work without push and pop by calling translate(-x-y) here but whatevs, push and pop are really comfy to use
 
 	  }
 	}
