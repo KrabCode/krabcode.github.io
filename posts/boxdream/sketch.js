@@ -41,7 +41,7 @@ function draw(){
 			//seeing as d and td are both in the 0-1 range the multiplied values will also never exit the 0-1 range
 			//this fact allows me to map this to any other range I want really easily.
 			//I map it to a range of 0-512 just because I played with it for a while and this looked pretty I guess
-			//%200 means there's a hue range between 200 and 255 I'm not interested in and would rather loop back to 1
+			//%200 means there's a hue range between 200 and 255 I'm not interested, I'd otherwise have to say %255 here to stay in the hue range
 			//512 and 200 are not set in stone, feel free to play with them to get different gradients, for example I like the final hue range between 130 and 200 a lot for this sketch too
 
 			//so now that we know everything about this box we're about to draw, let's draw it
