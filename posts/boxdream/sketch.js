@@ -13,9 +13,9 @@ function draw(){
   rotateZ(PI/4);
 	//this is originally based on https://www.youtube.com/watch?v=H81Tdrmz2LA and basically extending my older sketch https://krabcode.github.io/posts/honeycomb/post
 
-  //loop through all possible box positions, x and y will be the box coordinates
+	//loop through all possible box positions, x and y will be the box coordinates
 	//notice the loop doesn't start at 0 - this means the center is at x = 0, y = 0 which is useful for finding your distance from it as well as drawing it in 3D
-  for(var x = -w/2; x < w/2; x+= scl){
+	for(var x = -w/2; x < w/2; x+= scl){
 	for(var y = -w/2; y < w/2; y+= scl){
 		  //for every box on the plane: we'll have to find how tall to make it and what color to give it
 			//using only distance and time to inform these properties gets kind of boring as you can see in the Honeycomb example
@@ -29,9 +29,9 @@ function draw(){
 			//there's sine involved because I want the changes that time supplies to loop forever between known values
 			// and .5+.5* is to map the output of the sine function which ranges from -1 to 1 to what I actually want: 0 - 1
 
-      var zscl = 4*scl*td; //zscl is the height of each individual box - I take the timeDistance and inform the height with it
+	    var zscl = 4*scl*td; //zscl is the height of each individual box - I take the timeDistance and inform the height with it
 
-      var h = map(d*td,0,1,0,512)%200; //h (hue) is found by multiplying d and td.
+	    var h = map(d*td,0,1,0,512)%200; //h (hue) is found by multiplying d and td.
 			//seeing as d and td are both in the 0-1 range the multiplied values will also never exit the 0-1 range
 			//this fact allows me to map this to any other range I want really easily.
 			//I map it to a range of 0-512 just because I played with it for a while and this looked pretty I guess
@@ -40,11 +40,11 @@ function draw(){
 
 			//so now that we know everything about this box we're about to draw, let's draw it
 			push(); //push a new matrix on the matrix stack because I want to be able to go back where I came from I was really easily
-      translate(x,y); //move the matrix to my box position
-      noStroke(); //outlines slow this down a lot, we don't need them anyhow
-      fill(h, 150, 255); //fill the boxes with a color of the hue, desaturate it a tiny bit (150) and give it full brightness (255)
-      box(scl, scl, zscl); //draw the box, two of its sides will always be the same, only the height changes
-			pop(); //return to whence I came. this would also work without push and pop by calling translate(-x-y) here but whatevs, push and pop are really comfy to use
+	    translate(x,y); //move the matrix to my box position
+	    noStroke(); //outlines slow this down a lot, we don't need them anyhow
+	    fill(h, 150, 255); //fill the boxes with a color of the hue, desaturate it a tiny bit (150) and give it full brightness (255)
+	    box(scl, scl, zscl); //draw the box, two of its sides will always be the same, only the height changes
+			pop(); //return to the original matrix. this would also work without push and pop by calling translate(-x-y) here but whatevs, push and pop are really comfy to use
 
 	  }
 	}
