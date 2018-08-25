@@ -17,7 +17,7 @@ function draw(){
 	//notice the loop doesn't start at 0 - this means the center is at x = 0, y = 0 which is useful for finding your distance from it as well as drawing it in 3D
   for(var x = -w/2; x < w/2; x+= scl){
 	for(var y = -w/2; y < w/2; y+= scl){
-		  //for every box on the plane: we'll hav{e to find how tall to make it and what color to give it
+		  //for every box on the plane: we'll have to find how tall to make it and what color to give it
 			//using only distance and time to inform these properties gets kind of boring as you can see in the Honeycomb example
 			// so this'll take the smaller of the two distances from center to mix things up a bit
 			var md  = min(abs(x), abs(y)); //md(minimumDistance) is a number between 0 and w/2 that is closely related to the distance of the box from the center
