@@ -44,7 +44,7 @@ function draw(){
 	    noStroke(); //outlines slow this down a lot, we don't need them anyhow
 	    fill(h, 150, 255); //fill the boxes with a color of the hue, desaturate it a tiny bit (150) and give it full brightness (255)
 	    box(scl, scl, zscl); //draw the box, two of its sides will always be the same, only the height changes
-			pop(); //return to the original matrix. this would also work without push and pop by calling translate(-x-y) here but whatevs, push and pop are really comfy to use
+			pop(); //return to the original matrix. this would also work without push and pop by calling translate(-x,-y) here but whatevs, push and pop are really comfy to use
 
 	  }
 	}
