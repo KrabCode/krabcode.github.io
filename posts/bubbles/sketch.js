@@ -2,8 +2,8 @@ let ps;
 var pCount = 512;
 var minm = 12;
 var maxm = 64;
-var bgalpha = .5;
-var fgalpha = .5;
+var bgalpha = .2;
+var fgalpha = .8;
 var w,h;
 
 function setup() {
