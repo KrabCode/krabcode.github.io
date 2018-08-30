@@ -5,7 +5,7 @@ var stemStrokeWeight = 1;
 var endStrokeWeight = .1;
 var lineSize = 0;
 var range = 0;
-var startRange = -410;
+var startRange = -390;
 var paused = false;
 
 function setup() {
