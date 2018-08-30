@@ -29,6 +29,11 @@ function draw() {
 
 	if(paused){
 		range = map(mouseX, 0, width,-TWO_PI*2,TWO_PI*2);
+		stroke(.5);
+		fill(1);
+		textSize(16);
+		textAlign(CENTER, CENTER);
+		text('manual control', width/2 , 16);
 	}else{
 		range = map(sin(radians(startRange+t)),-1,1,0,TWO_PI*2);
 	}
