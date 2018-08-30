@@ -1,13 +1,14 @@
 var stems = 4;
-var maxGen = 4;
-var brcount = 4;
-var stemStrokeWeight = 3;
-var endStrokeWeight = .2;
+var maxGen = 1;
+var brcount = 24;
+var stemStrokeWeight = 1;
+var endStrokeWeight = .1;
 var lineSize = 40;
 var range = 0;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight, P2D);
+	noSmooth();
 	colorMode(HSB, 1,1,1,1);
 }
 
@@ -18,7 +19,7 @@ function windowResized() {
 function draw() {
 	background(0);
   stroke(1);
-	lineSize = width / 20;
+	lineSize = height/10;
   range = map(sin(radians(frameCount/4)),-1,1,0,TWO_PI*2);
   var c = createVector(width/2, height/2);
   for (var ang = 0; ang < TWO_PI; ang += TWO_PI/stems) {
@@ -30,7 +31,7 @@ function draw() {
 }
 
 function drawLines(x0, y0, x1, y1, gen) {
-  if (gen++ < maxGen) {
+  if (gen++ <= maxGen) {
     var tars = new Array();
     var weight = map(gen, 0, maxGen, stemStrokeWeight, endStrokeWeight);
     strokeWeight(weight);
