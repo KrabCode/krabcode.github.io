@@ -1,6 +1,6 @@
 var stems = 4;
-var maxGen = 1;
-var brcount = 12;
+var maxGen = 2;
+var brcount = 6;
 var stemStrokeWeight = 1;
 var endStrokeWeight = .1;
 var lineSize = 0;
@@ -53,7 +53,7 @@ function drawLines(x0, y0, x1, y1, gen) {
       var tar = getPointAtAngle(x1, y1, lineSize, a);
       tars.push(tar);
 			var hue = map(abs(brcount/2-i), 0, brcount/2, .55, 0.95);
-			var weight = map(gen, 1, maxGen, stemStrokeWeight, endStrokeWeight);
+			var weight = min(.3,1.5 - gen*.4);
 	    strokeWeight(weight);
 			stroke(hue, .8, 1);
       line(x1, y1, tar.x, tar.y);
