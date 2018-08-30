@@ -55,7 +55,7 @@ function drawLines(x0, y0, x1, y1, gen) {
 			var hue = map(abs(brcount/2-i), 0, brcount/2, .55, 0.95);
 			var weight = map(gen, 1, maxGen, stemStrokeWeight, endStrokeWeight);
 	    strokeWeight(weight);
-			stroke(hue, .6, 1, .5);
+			stroke(hue, .8, 1, .8);
       line(x1, y1, tar.x, tar.y);
     }
     for (var i = 0; i < tars.length; i++){
