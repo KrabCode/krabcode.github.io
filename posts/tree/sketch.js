@@ -6,9 +6,7 @@ var endStrokeWeight = .1;
 var lineSize = 0;
 var range = 0;
 var startRange = -410;
-
 var paused = false;
-var pausedAtFrame = 0;
 
 function setup() {
 	noSmooth();
@@ -18,11 +16,6 @@ function setup() {
 
 function mousePressed(){
 	paused = !paused;
-	if(paused){
-		pausedAtFrame = frameCount;
-	}else{
-		frameCount = pausedAtFrame;
-	}
 }
 
 function windowResized() {
