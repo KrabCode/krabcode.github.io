@@ -37,7 +37,7 @@ function draw() {
   for (var ang = 0; ang < TWO_PI; ang += TWO_PI/stems) {
     var tar = getPointAtAngle(c.x, c.y, lineSize, ang);
     strokeWeight(stemStrokeWeight);
-		stroke(hue, .55, 1, .5);
+		stroke(hue, .55, 1);
     line(c.x, c.y, tar.x, tar.y);
     drawLines(c.x, c.y, tar.x, tar.y, 0);
   }
