@@ -27,7 +27,7 @@ function draw(){
 			//using only distance and time to inform these properties gets kind of boring as you can see in the Honeycomb example
 			//so this'll take the smaller of the two distances from center to mix things up a bit
 			var md  = min(abs(x), abs(y)); //md(minimumDistance) is a number between 0 and w/2 that is closely related to the distance of the box from the center
-			var d = map(abs(x)+abs(y), -w, w, 0, 1); //d(distance) is the actual distance from center but mapped to a range from 0 to 1
+			var d = map(abs(x)+abs(y), 0, w, 0, 1); //d(distance) is the actual distance from center but mapped to a range from 0 to 1
 
 			var td = .5+.5*sin(radians(md-frameCount)); //td (timeDistance) is also a number between 0 and 1 that is related to the minimumDistance and time (frameCount)
 			//md-frameCount is the main part of finding this variable
