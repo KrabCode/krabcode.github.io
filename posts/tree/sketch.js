@@ -1,6 +1,6 @@
 var stems = 4;
-var maxGen = 2;
-var brcount = 5;
+var maxGen = 1;
+var brcount = 20;
 var stemStrokeWeight = 1;
 var endStrokeWeight = .1;
 var lineSize = 0;
@@ -42,7 +42,7 @@ function draw() {
   for (var ang = 0; ang < TWO_PI; ang += TWO_PI/stems) {
     var tar = getPointAtAngle(c.x, c.y, lineSize, ang);
     strokeWeight(stemStrokeWeight);
-		stroke(hue, 0., 1);
+		stroke(hue, 1, 1);
     line(c.x, c.y, tar.x, tar.y);
     drawLines(c.x, c.y, tar.x, tar.y, 0);
   }
@@ -57,10 +57,10 @@ function drawLines(x0, y0, x1, y1, gen) {
       var a = midA-range/2 + i*angleStep;
       var tar = getPointAtAngle(x1, y1, lineSize, a);
       tars.push(tar);
-			var hue = map(abs(brcount/2-i), 0, brcount/2, .0, 1);
-			var weight = (maxGen - gen*.75);
+			var hue = map(abs(brcount/2-i), 0, brcount/2, .5, 1);
+			var weight = (stemStrokeWeight - gen*.4);
 	    strokeWeight(weight);
-			stroke(hue, .85, 1);
+			stroke(hue, 1, 1);
       line(x1, y1, tar.x, tar.y);
     }
     for (var i = 0; i < tars.length; i++){
