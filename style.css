@@ -1,0 +1,21 @@
+html, body {
+  height: 100%;
+}
+header{
+	position: absolute;
+    left: 50px;
+	top: 0px;
+    width: 200px;
+    height: 200px;
+	font-size: 40px;
+}
+body {
+  margin: 0;
+  display: flex;
+
+  /* This centers our sketch horizontally. */
+  justify-content: center;
+
+  /* This centers our sketch vertically. */
+  align-items: center;
+}
