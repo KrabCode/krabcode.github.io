@@ -1,1 +1,1 @@
-so exciting to be finally making these wonderful things
+I am so happy to be with you in this magical moment
