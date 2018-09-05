@@ -1,6 +1,7 @@
 var stems = 16;
-var maxGen = 1;
-var brcount = 3;
+var maxGen = 2;
+var maxWeight = 5;
+var brcount = 5;
 var lineSize = 0;
 var range = 0;
 var startRange = -390;
@@ -39,15 +40,16 @@ function draw() {
   var c = createVector(width/2, height/2);
   for (var ang = 0; ang < TWO_PI; ang += TWO_PI/stems) {
     var tar = getPointAtAngle(c.x, c.y, lineSize, ang);
+/*
     strokeWeight(2);
 		stroke(0, 0, 1);
-    line(c.x, c.y, tar.x, tar.y);
+    line(c.x, c.y, tar.x, tar.y);*/
     drawLines(c.x, c.y, tar.x, tar.y, 0);
   }
 }
 
 function drawLines(x0, y0, x1, y1, gen) {
-  if (gen++ <= maxGen) {
+  if (++gen <= maxGen) {
     var tars = new Array();
     var midA = getAngle(x0, y0, x1, y1);
     var angleStep = range / brcount;
@@ -55,7 +57,7 @@ function drawLines(x0, y0, x1, y1, gen) {
       var a = midA-range/2 + i*angleStep;
       var tar = getPointAtAngle(x1, y1, lineSize, a);
       tars.push(tar);
-			var weight = (2 - gen*.5);
+			var weight = max(1,maxWeight - gen*maxWeight/maxGen);
 	    strokeWeight(weight);
 			stroke(0, 0, 1);
       line(x1, y1, tar.x, tar.y);
