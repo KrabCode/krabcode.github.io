@@ -8,7 +8,6 @@ var startRange = -390;
 var paused = false;
 
 function setup() {
-	smooth(8);
 	createCanvas(windowWidth, windowHeight);
 	colorMode(HSB,1,1,1,1);
 }
@@ -23,7 +22,7 @@ function windowResized() {
 
 function draw() {
 	background(0);
-	lineSize = height/8;
+	lineSize = height/6;
 	var t = frameCount/8;
 
 	if(paused){

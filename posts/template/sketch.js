@@ -1,7 +1,7 @@
 function setup() {
-	colorMode(HSB, 255,255,255);
+	colorMode(HSB, 1,1,1,1);
 	createCanvas(windowWidth, windowHeight);
-	background(150);
+	background(.7);
 	noSmooth();
 }
 
@@ -10,7 +10,7 @@ function windowResized() {
 }
 
 function draw() {
-	background(150);
+	background(.7);
   line(0,0,width,height);
 	line(width,0,0,height);
 }
