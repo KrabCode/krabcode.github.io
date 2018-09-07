@@ -14,7 +14,7 @@ rules[0] = {
 function setup() {
 	colorMode(HSB, 1,1,1,1);
 	createCanvas(windowWidth, windowHeight, WEBGL);
-	  easycam = createEasyCam({center:[0,-width/6,0]});
+	easycam = createEasyCam({center:[0,-height/6,0]});
 	background(0);
 	print("Behold the mighty L-System magic")
 	print("axiom: " + axiom.toString());
