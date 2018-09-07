@@ -1,6 +1,5 @@
 
 var angle;
-
 var summerAngle = 22;
 var generations = 3;
 var len = 30;
@@ -11,6 +10,7 @@ rules[0] = {
 		a : "F",
 		b : "F+[+F-F-F]-[-F+F+F]"
 }
+
 function setup() {
 	colorMode(HSB, 1,1,1,1);
 	createCanvas(windowWidth, windowHeight, WEBGL);
@@ -25,12 +25,12 @@ function setup() {
 		generate();
 	}
 }
+
 function draw(){
 	background(0);
 	strokeWeight(1);
 	rotateY(-PI/6);
 	angle = radians(summerAngle+3*sin(frameCount/50));
-
 	for(var i = 0; i < sentence.length; i++){
 			var curr = sentence.charAt(i);
 			if(curr == 'F'){
