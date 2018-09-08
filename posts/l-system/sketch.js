@@ -7,7 +7,7 @@ var sentence = axiom;
 var rules = [];
 rules[0] = {
   a: "F",
-  b: "F+[+F-F-F]-[-F+F+F]"
+  b: "F+[+F-F-F]-[-F+F]"
 }
 
 function setup() {
@@ -27,21 +27,28 @@ function setup() {
   }
 }
 
+var lastMaxHeight = 100;
+
 function draw() {
   background(0);
   strokeWeight(1);
   rotateY(-PI / 6);
   angle = radians(summerAngle + 3 * sin(frameCount / 50));
+
+  var height = 0;
+  var remember = 0;
+
   for (var i = 0; i < sentence.length; i++) {
     var curr = sentence.charAt(i);
     if (curr == 'F') {
-      strokeWeight(map(i, 0, sentence.length, 2, 1));
-      var h = map(i, 0, sentence.length, .2, .45);
-      var s = map(i, 0, sentence.length, .3, 1);
-      var b = map(i, 0, sentence.length, .45, 1);
-      stroke(h, s, b);
+      height++;
+      if(height > lastMaxHeight){
+        lastMaxHeight = height;
+      }
+      stroke(map(height+frameCount, 0, lastMaxHeight, 0, 1)%1,1,1);
       line(0, 0, 0, -len);
       translate(0, -len);
+
     } else if (curr == '+') {
       rotateX(angle);
       rotateZ(angle * .6);
@@ -50,10 +57,14 @@ function draw() {
       rotateZ(-angle * .6);
     } else if (curr == '[') {
       push();
+      remember = height;
     } else if (curr == ']') {
       pop();
+      height = remember;
     }
   }
+
+
 }
 
 function generate() {
