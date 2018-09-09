@@ -11,11 +11,12 @@ rules[0] = {
 
 
 var bestAngle = 22;
-var generations = 3;
 
+var generations = 3;
 var maxDepth = 3;
-var leafCount = 8;
-var maxLeafSize = 30;
+
+var leafCount = 4;
+var maxLeafSize = 15;
 
 var season = 0;
 var maxSeason = 4;
@@ -45,7 +46,7 @@ function draw() {
   print(season);
   background(0);
   strokeWeight(1);
-  translate(width*.5, height*.7);
+  translate(width*.5, height);
   angle = radians(bestAngle);
   var depth = 0;
   for (var i = 0; i < sentence.length; i++) {
@@ -54,8 +55,8 @@ function draw() {
       //LEAVES
       if(depth == maxDepth){
         var leafSize = maxLeafSize;
-        var summerLeafFill = color(113,90,80,10);
-        var autumnLeafFill = color(map(i, 0, sentence.length, 0, 50),90,80,10);
+        var summerLeafFill = color(113,90,80);
+        var autumnLeafFill = color(map(i, 0, sentence.length, 0, 50),90,80);
         if(season >= 0 && season <= 1){
           fill(summerLeafFill);
           leafSize = season*maxLeafSize;
@@ -63,10 +64,10 @@ function draw() {
         }
         if(season > 1 && season <= 2){
           fill(summerLeafFill);
-          drawLeaves(leafSize);
+          drawLeaves(maxLeafSize);
         }
         if(season > 2 && season <= 3){
-          var current = season - 2;
+          var current = map(season, 1, 3, 0, 1);
           fill(lerpColor(summerLeafFill, autumnLeafFill, current));
           drawLeaves(leafSize);
         }if(season > 3){
@@ -99,23 +100,22 @@ function draw() {
   }
 }
 
-
 function drawLeaves(leafSize){
   var scl = len/leafCount;
   for(var j = 0; j <= leafCount; j++){
     noStroke();
-    quad(leafSize+leafSize*sin(j-radians(frameCount)),-scl*j,
+    quad(leafSize+leafSize*sin(j),-scl*j,
        0,-scl*j-leafSize,
-       -leafSize+leafSize*sin(j-radians(frameCount)), -scl*j,
+       -leafSize+leafSize*sin(j), -scl*j,
        0, -scl*j+leafSize);
   }
 }
 
 function scatterLeaves(leafSize, percent){
   var scl = len/leafCount;
-  for(var j = 0; j <= leafCount; j++){
+  for(var j = 0; j < leafCount; j++){
     push();
-    if(j % 4 == 0){
+    if(j%2<percent){
       translate(percent*100, percent*100);
     }
     leafSize = leafSize-percent*leafSize;
