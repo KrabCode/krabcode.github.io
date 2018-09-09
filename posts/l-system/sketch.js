@@ -1,6 +1,6 @@
 var angle;
 
-var len = 50;
+var len = 80;
 var axiom = "F";
 var sentence = axiom;
 var rules = [];
@@ -115,9 +115,8 @@ function scatterLeaves(leafSize, percent){
   var scl = len/leafCount;
   for(var j = 0; j < leafCount; j++){
     push();
-    if(j%2<percent){
-      translate(percent*100, percent*100);
-    }
+    
+    translate(percent*100, percent*100);
     leafSize = leafSize-percent*leafSize;
     noStroke();
     quad(leafSize+leafSize*sin(j-radians(frameCount)),-scl*j,
