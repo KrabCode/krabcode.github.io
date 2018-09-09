@@ -1,7 +1,6 @@
 var angle;
-var summerAngle = 22;
-var generations = 3;
-var len = 30;
+
+var len = 50;
 var axiom = "F";
 var sentence = axiom;
 var rules = [];
@@ -10,61 +9,123 @@ rules[0] = {
   b: "F+[+F-F-F]-[-F+F]"
 }
 
+
+var bestAngle = 22;
+var generations = 3;
+
+var maxDepth = 3;
+var leafCount = 8;
+var maxLeafSize = 30;
+
+var season = 0;
+var maxSeason = 4;
+
 function setup() {
-  colorMode(HSB, 1, 1, 1, 1);
-  createCanvas(windowWidth, windowHeight, WEBGL);
+  colorMode(HSB, 400, 100, 100, 100);
+  createCanvas(windowWidth, windowHeight);
+/*
   easycam = createEasyCam({
     center: [0, -height / 6, 0]
-  });
+  });*/
   background(0);
+  /*
   print("Behold the mighty L-System magic")
   print("axiom: " + axiom.toString());
   for (var r = 0; r < rules.length; r++) {
     print("rule " + r + ": " + rules[r].a + "->" + rules[r].b);
-  }
+  }*/
   for (var i = 0; i < generations; i++) {
     generate();
   }
 }
 
-var lastMaxHeight = 100;
-
 function draw() {
+  season = (frameCount/100);
+  season = season%maxSeason;
+  print(season);
   background(0);
   strokeWeight(1);
-  rotateY(-PI / 6);
-  angle = radians(summerAngle + 3 * sin(frameCount / 50));
-
-  var height = 0;
-  var remember = 0;
-
+  translate(width*.5, height*.7);
+  angle = radians(bestAngle);
+  var depth = 0;
   for (var i = 0; i < sentence.length; i++) {
     var curr = sentence.charAt(i);
     if (curr == 'F') {
-      height++;
-      if(height > lastMaxHeight){
-        lastMaxHeight = height;
+      //LEAVES
+      if(depth == maxDepth){
+        var leafSize = maxLeafSize;
+        var summerLeafFill = color(113,90,80,10);
+        var autumnLeafFill = color(map(i, 0, sentence.length, 0, 50),90,80,10);
+        if(season >= 0 && season <= 1){
+          fill(summerLeafFill);
+          leafSize = season*maxLeafSize;
+          drawLeaves(leafSize);
+        }
+        if(season > 1 && season <= 2){
+          fill(summerLeafFill);
+          drawLeaves(leafSize);
+        }
+        if(season > 2 && season <= 3){
+          var current = season - 2;
+          fill(lerpColor(summerLeafFill, autumnLeafFill, current));
+          drawLeaves(leafSize);
+        }if(season > 3){
+          fill(autumnLeafFill);
+          scatterLeaves(leafSize, season-3);
+        }
       }
-      stroke(map(height+frameCount, 0, lastMaxHeight, 0, 1)%1,1,1);
-      line(0, 0, 0, -len);
-      translate(0, -len);
 
+      //BRANCH
+      strokeWeight(map(depth, 0, maxDepth, 10,2));
+      stroke(40,65,38);
+      line(0, 0, 0, -len);
+
+      translate(0, -len);
     } else if (curr == '+') {
-      rotateX(angle);
-      rotateZ(angle * .6);
+      rotate(angle);
     } else if (curr == '-') {
-      rotateX(-angle);
-      rotateZ(-angle * .6);
+      rotate(-angle);
     } else if (curr == '[') {
       push();
-      remember = height;
+      depth++;
+      if(depth > maxDepth){
+        maxDepth = depth;
+        print("maxDepth: " + maxDepth)
+      }
     } else if (curr == ']') {
       pop();
-      height = remember;
+      depth--;
     }
   }
+}
 
 
+function drawLeaves(leafSize){
+  var scl = len/leafCount;
+  for(var j = 0; j <= leafCount; j++){
+    noStroke();
+    quad(leafSize+leafSize*sin(j-radians(frameCount)),-scl*j,
+       0,-scl*j-leafSize,
+       -leafSize+leafSize*sin(j-radians(frameCount)), -scl*j,
+       0, -scl*j+leafSize);
+  }
+}
+
+function scatterLeaves(leafSize, percent){
+  var scl = len/leafCount;
+  for(var j = 0; j <= leafCount; j++){
+    push();
+    if(j % 4 == 0){
+      translate(percent*100, percent*100);
+    }
+    leafSize = leafSize-percent*leafSize;
+    noStroke();
+    quad(leafSize+leafSize*sin(j-radians(frameCount)),-scl*j,
+       0,-scl*j-leafSize,
+       -leafSize+leafSize*sin(j-radians(frameCount)), -scl*j,
+       0, -scl*j+leafSize);
+    pop();
+  }
 }
 
 function generate() {
@@ -84,5 +145,5 @@ function generate() {
     }
   }
   sentence = nextSentence;
-  print("sentence: " + sentence);
+  // print("sentence: " + sentence);
 }
