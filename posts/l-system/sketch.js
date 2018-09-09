@@ -66,11 +66,11 @@ function draw() {
           fill(summerLeafFill);
           drawLeaves(maxLeafSize);
         }
-        if(season > 2 && season <= 3){
-          var current = map(season, 1, 3, 0, 1);
+        if(season > 2 && season < 3){
+          var current = map(season, 2, 3, 0, 1);
           fill(lerpColor(summerLeafFill, autumnLeafFill, current));
           drawLeaves(leafSize);
-        }if(season > 3){
+        }if(season >= 3){
           fill(autumnLeafFill);
           scatterLeaves(leafSize, season-3);
         }
@@ -115,13 +115,15 @@ function scatterLeaves(leafSize, percent){
   var scl = len/leafCount;
   for(var j = 0; j < leafCount; j++){
     push();
-    
-    translate(percent*100, percent*100);
+    if(j % 3 == 0 ){
+      translate(percent*40, percent*40);
+    }
+
     leafSize = leafSize-percent*leafSize;
     noStroke();
-    quad(leafSize+leafSize*sin(j-radians(frameCount)),-scl*j,
+    quad(leafSize+leafSize*sin(j),-scl*j,
        0,-scl*j-leafSize,
-       -leafSize+leafSize*sin(j-radians(frameCount)), -scl*j,
+       -leafSize+leafSize*sin(j), -scl*j,
        0, -scl*j+leafSize);
     pop();
   }
