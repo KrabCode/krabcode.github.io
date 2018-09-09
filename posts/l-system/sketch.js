@@ -24,10 +24,10 @@ var maxSeason = 4;
 function setup() {
   colorMode(HSB, 400, 100, 100, 100);
   createCanvas(windowWidth, windowHeight);
-/*
-  easycam = createEasyCam({
-    center: [0, -height / 6, 0]
-  });*/
+  /*
+    easycam = createEasyCam({
+      center: [0, -height / 6, 0]
+    });*/
   background(0);
   /*
   print("Behold the mighty L-System magic")
@@ -41,44 +41,46 @@ function setup() {
 }
 
 function draw() {
-  season = (frameCount/100);
-  season = season%maxSeason;
+  season = (frameCount / 100);
+  season = season % maxSeason;
   print(season);
   background(0);
   strokeWeight(1);
-  translate(width*.5, height);
+  translate(width * .5, height);
   angle = radians(bestAngle);
   var depth = 0;
   for (var i = 0; i < sentence.length; i++) {
     var curr = sentence.charAt(i);
     if (curr == 'F') {
+
       //LEAVES
-      if(depth == maxDepth){
+      if (depth == maxDepth) {
         var leafSize = maxLeafSize;
-        var summerLeafFill = color(113,90,80);
-        var autumnLeafFill = color(map(i, 0, sentence.length, 0, 50),90,80);
-        if(season >= 0 && season <= 1){
+        var summerLeafFill = color(113, 90, 80);
+        var autumnLeafFill = color(map(i, 0, sentence.length, 0, 50), 90, 80);
+        if (season >= 0 && season <= 1) {
           fill(summerLeafFill);
-          leafSize = season*maxLeafSize;
+          leafSize = season * maxLeafSize;
           drawLeaves(leafSize);
         }
-        if(season > 1 && season <= 2){
+        if (season > 1 && season <= 2) {
           fill(summerLeafFill);
           drawLeaves(maxLeafSize);
         }
-        if(season > 2 && season < 3){
+        if (season > 2 && season < 3) {
           var current = map(season, 2, 3, 0, 1);
           fill(lerpColor(summerLeafFill, autumnLeafFill, current));
           drawLeaves(leafSize);
-        }if(season >= 3){
+        }
+        if (season >= 3) {
           fill(autumnLeafFill);
-          scatterLeaves(leafSize, season-3);
+          scatterLeaves(leafSize, season - 3);
         }
       }
 
       //BRANCH
-      strokeWeight(map(depth, 0, maxDepth, 10,2));
-      stroke(40,65,38);
+      strokeWeight(map(depth, 0, maxDepth, 10, 2));
+      stroke(40, 65, 38);
       line(0, 0, 0, -len);
 
       translate(0, -len);
@@ -89,7 +91,7 @@ function draw() {
     } else if (curr == '[') {
       push();
       depth++;
-      if(depth > maxDepth){
+      if (depth > maxDepth) {
         maxDepth = depth;
         print("maxDepth: " + maxDepth)
       }
@@ -100,31 +102,31 @@ function draw() {
   }
 }
 
-function drawLeaves(leafSize){
-  var scl = len/leafCount;
-  for(var j = 0; j <= leafCount; j++){
+function drawLeaves(leafSize) {
+  var scl = len / leafCount;
+  for (var j = 0; j <= leafCount; j++) {
     noStroke();
-    quad(leafSize+leafSize*sin(j),-scl*j,
-       0,-scl*j-leafSize,
-       -leafSize+leafSize*sin(j), -scl*j,
-       0, -scl*j+leafSize);
+    quad(leafSize + leafSize * sin(j), -scl * j,
+      0, -scl * j - leafSize,
+      -leafSize + leafSize * sin(j), -scl * j,
+      0, -scl * j + leafSize);
   }
 }
 
-function scatterLeaves(leafSize, percent){
-  var scl = len/leafCount;
-  for(var j = 0; j < leafCount; j++){
+function scatterLeaves(leafSize, percent) {
+  var scl = len / leafCount;
+  for (var j = 0; j < leafCount; j++) {
     push();
-    if(j % 3 == 0 ){
-      translate(percent*40, percent*40);
+    if (j % 3 == 0) {
+      translate(percent * 40, percent * 40);
     }
 
-    leafSize = leafSize-percent*leafSize;
+    leafSize = leafSize - percent * leafSize;
     noStroke();
-    quad(leafSize+leafSize*sin(j),-scl*j,
-       0,-scl*j-leafSize,
-       -leafSize+leafSize*sin(j), -scl*j,
-       0, -scl*j+leafSize);
+    quad(leafSize + leafSize * sin(j), -scl * j,
+      0, -scl * j - leafSize,
+      -leafSize + leafSize * sin(j), -scl * j,
+      0, -scl * j + leafSize);
     pop();
   }
 }
