@@ -4,14 +4,12 @@ var scl = 200;
 function setup() {
 	colorMode(HSB, 255,255,255);
 	createCanvas(windowWidth, windowHeight,WEBGL);
-
 	easycam = createEasyCam();
 	background(0);
-
 }
 
 function preload(){
-	rabbit = loadImage("https://krabcode.github.io/posts/rabbit/rabbit.jpg");
+	rabbit = loadImage("rabbit.jpg");
 }
 
 function windowResized() {
