@@ -10,7 +10,11 @@ function windowResized() {
 }
 
 function draw() {
-	background(.7);
-  line(-width,-height,width,height);
-	line(width,-width,-height,height);
+	background(.2);
+	fill(0);
+	stroke(1);
+	rotateY(radians(frameCount));
+	rotateZ(PI/4);
+	rotateX(PI/2);
+	box(150);
 }
