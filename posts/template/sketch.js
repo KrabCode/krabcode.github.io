@@ -1,5 +1,5 @@
 function setup() {
-	colorMode(HSB, 1,1,1,1);
+
 	createCanvas(windowWidth, windowHeight, WEBGL);
 	easycam = new Dw.EasyCam(this._renderer);
 	background(.7);
@@ -10,11 +10,13 @@ function windowResized() {
 }
 
 function draw() {
-	background(.2);
-	fill(0);
-	stroke(1);
-	rotateY(radians(frameCount));
-	rotateZ(PI/4);
-	rotateX(PI/2);
+	background(0);
+	pointLight(250, 250, 250, 0,0, 250);
+	fill(30);
+	stroke(255);
+	ambientMaterial(250);
+	rotateX(radians(frameCount/4));
+	rotateY(radians(frameCount/3));
+	rotateZ(radians(frameCount/2));
 	box(150);
 }
