@@ -1,8 +1,8 @@
 function setup() {
 	colorMode(HSB, 1,1,1,1);
-	createCanvas(windowWidth, windowHeight);
+	createCanvas(windowWidth, windowHeight, WEBGL);
+	easycam = new Dw.EasyCam(this._renderer);
 	background(.7);
-	noSmooth();
 }
 
 function windowResized() {
@@ -11,6 +11,6 @@ function windowResized() {
 
 function draw() {
 	background(.7);
-  line(0,0,width,height);
-	line(width,0,0,height);
+  line(-width,-height,width,height);
+	line(width,-width,-height,height);
 }
