@@ -19,7 +19,7 @@ function preload() {
 
 function setup() {
 	createCanvas(windowWidth, windowHeight, WEBGL);
-	easycam = new Dw.EasyCam(this._renderer, {distance : 1000});
+	easycam = new Dw.EasyCam(this._renderer, {distance : lunarDistance*1.3});
 	background(0);
 }
 
@@ -35,10 +35,10 @@ function draw() {
 	noStroke();
 	texture(earthMap);
 	ambientLight(25);
-	directionalLight(255, 255, 255, 1, 0, 0);
+	directionalLight(255, 255, 255, 1, 0, -.5);
 	sphere(earthRadius);
 	pop();
-	rotateY(.5+radians(earthRotation/27));
+	rotateY(-1+radians(earthRotation/27));
 	rotateZ(radians(-5.14));
 	//MOON
 	translate(lunarDistance,0,0);
