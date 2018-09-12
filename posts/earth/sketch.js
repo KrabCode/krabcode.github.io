@@ -38,7 +38,7 @@ function draw() {
 	directionalLight(255, 255, 255, 1, 0, -.5);
 	sphere(earthRadius);
 	pop();
-	rotateY(-1+radians(earthRotation/27));
+	rotateY(-1.2+radians(earthRotation/27));
 	rotateZ(radians(-5.14));
 	//MOON
 	translate(lunarDistance,0,0);
