@@ -6,7 +6,7 @@ var starCount = 150;
 var earthRadius = 250; //6,371km
 
 var scaledKm = earthRadius/6371;
-var distanceDownscale = 10;
+var distanceDownscale = 10; //distance not to scale :(
 var lunarDistance = scaledKm*400000 / distanceDownscale; //400'000 km
 
 //the sacred texts
