@@ -24,13 +24,13 @@ function setup() {
 }
 
 function draw() {
-	var earthRotation = frameCount/6;
+	var earthRotation = frameCount;
 	var mx = map(mouseX, 0, width, 0, 360);
 	background(0);
 	//EARTH
 	push();
 	rotateZ(PI*2);
-	//rotateZ(-0.401425728);
+	rotateZ(-0.401425728);
 	rotateY(radians(earthRotation));
 	noStroke();
 	texture(earthMap);
