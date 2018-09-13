@@ -1,7 +1,7 @@
 var detail = 20;
 
 function setup() {
-	createCanvas(windowWidth, windowHeight, P2D);
+	createCanvas(windowWidth, windowHeight);
 	colorMode(HSB, 1, 1, 1, 1);
 }
 
@@ -16,7 +16,7 @@ function draw() {
   strokeWeight(2);
   var cx = width/2;
   var cy = height/2;
-  var r = width/5;
+  var r = detail * 20;
   for (var x = 0; x < width; x+= detail) {
     for (var y = 0; y < height; y+= detail) {
       var d = dist(x, y, cx, cy);
