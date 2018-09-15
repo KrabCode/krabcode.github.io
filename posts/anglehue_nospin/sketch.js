@@ -28,7 +28,7 @@ function draw() {
         var a = radians(.6*d*d*frameCount*mx)%PI;
         var p = map(a, 0, PI, 0, 1);
 				noStroke();
-				fill(p,1,1);
+				fill(p,.7,1);
         //stroke(p, 1, 1);
 				push();
 				translate(x,y);
