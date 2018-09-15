@@ -1,6 +1,7 @@
 
 var earthMap;
 var moonMap;
+var milkyWay;
 var stars;
 var starCount = 150;
 var earthRadius = 250; //6,371km
@@ -15,6 +16,7 @@ var lunarDistance = scaledKm*400000 / distanceDownscale; //400'000 km
 function preload() {
 	moonMap = loadImage("moon.jpg");
 	earthMap = loadImage("earthmap.jpg");
+	milkyWay = loadImage("eso0932a.jpg");
 }
 
 function setup() {
@@ -27,6 +29,8 @@ function draw() {
 	var earthRotation = frameCount;
 	var mx = map(mouseX, 0, width, 0, 360);
 	background(0);
+	texture(milkyWay);
+	sphere(4000);
 	//EARTH
 	push();
 	rotateZ(PI*2);
@@ -34,8 +38,10 @@ function draw() {
 	rotateY(radians(earthRotation));
 	noStroke();
 	texture(earthMap);
-	ambientLight(25);
-	directionalLight(255, 255, 255, 1, 0, -.5);
+	ambientLight(150);
+	var dirY = (mouseY / height - 0.5) * 4;
+	var dirX = (mouseX / width - 0.5) * 4;
+	directionalLight(255,255,255, 0, 0, -1);
 	sphere(earthRadius);
 	pop();
 	rotateY(-1.8+radians(earthRotation/27));

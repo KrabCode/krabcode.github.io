@@ -25,7 +25,7 @@ function draw() {
 				if(mouseX == 0 && mouseY == 0){
 					mx = .00012;
 				}
-        var a = radians(.6*d*d*frameCount*mx) %PI;
+        var a = radians(.6*d*d*frameCount*mx)%PI;
         var p = map(a, 0, PI, 0, 1);
         stroke(p, 1, 1);
 				push();
