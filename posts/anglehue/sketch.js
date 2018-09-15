@@ -11,7 +11,7 @@ function windowResized() {
 
 function draw() {
 	var detail = 30;
-	var mx = map(mouseX, 0, width, .00001, .00025);
+	var mx = map(mouseX, 0, width, .00001, .00026);
   background(0);
   stroke(255);
   strokeWeight(8);
@@ -23,7 +23,7 @@ function draw() {
       var d = dist(x, y, cx, cy);
       if (d<r) {
 				if(mouseX == 0 && mouseY == 0){
-					mx = .00025;
+					mx = .00012;
 				}
         var a = radians(.6*d*d*frameCount*mx) %PI;
         var p = map(a, 0, PI, 0, 1);
