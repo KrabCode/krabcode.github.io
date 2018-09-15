@@ -30,7 +30,7 @@ function draw() {
 	var mx = map(mouseX, 0, width, 0, 360);
 	background(0);
 	texture(milkyWay);
-	sphere(4000);
+	sphere(3000);
 	//EARTH
 	push();
 	rotateZ(PI*2);
