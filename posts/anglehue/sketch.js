@@ -17,7 +17,7 @@ function draw() {
   strokeWeight(8);
   var cx = width/2;
   var cy = height/2;
-  var r = 450;
+  var r = 449;
   for (var x = 0; x < width; x+= detail) {
     for (var y = 0; y < height; y+= detail) {
       var d = dist(x, y, cx, cy);
