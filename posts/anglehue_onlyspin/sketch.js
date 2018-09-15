@@ -1,0 +1,43 @@
+
+
+function setup() {
+	createCanvas(windowWidth, windowHeight);
+	colorMode(HSB, 1, 1, 1, 1);
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
+function draw() {
+	var detail = 30;
+	var mx = map(mouseX, 0, width, .00001, .00026);
+  background(0);
+  stroke(255);
+  strokeWeight(4);
+  var cx = width/2;
+  var cy = height/2;
+  var r = 449;
+  for (var x = 0; x < width; x+= detail) {
+    for (var y = 0; y < height; y+= detail) {
+      var d = dist(x, y, cx, cy);
+      if (d<r) {
+				if(mouseX == 0 && mouseY == 0){
+					mx = .00012;
+				}
+        var a = radians(.6*d*d*frameCount*mx)%PI;
+        //var p = map(a, 0, PI, 0, .2);
+        stroke(1, 0, 1);
+				push();
+				translate(x,y);
+				rotate(a);
+				line(-detail*.36, 0, detail*.36,0);
+				pop();
+      }
+    }
+  }
+	noStroke();
+	fill(1);
+	textSize(26);
+	text("speed: " + nf(mx*10000, 1,1), width-150, 50);
+}
