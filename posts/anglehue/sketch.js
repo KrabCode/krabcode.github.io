@@ -41,13 +41,3 @@ function draw() {
 	textSize(26);
 	text("speed: " + nf(mx*10000, 1,1), width-150, 50);
 }
-
-function getXAtAngle( x,  radius,  angle) {
-  return x + radius * cos(angle);
-}
-function getYAtAngle( y,  radius,  angle) {
-  return y + radius * sin(angle);
-}
-function getAngle( x0,  y0,  x1,  y1) {
-  return atan2(y1 - y0, x1 - x0);
-}
