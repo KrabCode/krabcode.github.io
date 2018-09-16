@@ -11,16 +11,16 @@ function windowResized() {
 }
 
 function draw() {
-	var detail = 26;
+	var detail = 30;
 	var mx = map(mouseX, 0, width, .00001, .00026);
   background(0);
 	noStroke();
-  var cx = width/2;
-  var cy = height/2;
-  var r = 449;
-  for (var x = 0; x < width; x+= detail) {
-    for (var y = 0; y < height; y+= detail) {
-      var d = dist(x, y, cx, cy);
+  var r = width/5;
+	push();
+	translate(width/2, height/2);
+  for (var x = -width/2; x < width/2; x+= detail) {
+    for (var y = -width/2; y < height/2; y+= detail) {
+      var d = dist(x, y, 0, 0);
       if (d<r) {
 				if(mouseX == 0 && mouseY == 0){
 					mx = .00012;
@@ -32,14 +32,18 @@ function draw() {
 				push();
 				translate(x,y);
 				rotate(a);
-				rect(0,0,detail*.7,detail*.7);
+				rect(0,0,detail*.75,detail*.75);
 				//line(-detail*.36, 0, detail*.36,0);
 				pop();
       }
     }
   }
+	pop();
 	noStroke();
-	fill(1);
+	fill(255);
 	textSize(26);
 	text("speed: " + nf(mx*10000, 1,1), width-150, 50);
+	stroke(255);
+	line(width/2, 0, width/2, height);
+	line(0, height/2,width,  height/2);
 }
