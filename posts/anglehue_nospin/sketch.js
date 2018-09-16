@@ -1,7 +1,7 @@
 
 
 function setup() {
-	createCanvas(windowWidth, windowHeight);
+	createCanvas(windowWidth, windowHeight, P2D);
 	colorMode(HSB, 1, 1, 1, 1);
 }
 
@@ -10,7 +10,7 @@ function windowResized() {
 }
 
 function draw() {
-	var detail = 30;
+	var detail = 25;
 	var mx = map(mouseX, 0, width, .00001, .00026);
   background(0);
   stroke(255);
@@ -28,12 +28,12 @@ function draw() {
         var a = radians(.6*d*d*frameCount*mx)%PI;
         var p = map(a, 0, PI, 0, 1);
 				noStroke();
-				fill(p,.7,1);
+				fill(p,1,1);
         //stroke(p, 1, 1);
 				push();
 				translate(x,y);
 				//rotate(a);
-				rect(0,0,detail,detail);
+				rect(0,0,detail*.7,detail*.7);
 				//line(-detail*.36, 0, detail*.36,0);
 				pop();
       }
