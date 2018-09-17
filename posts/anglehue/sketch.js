@@ -17,10 +17,12 @@ function draw() {
   strokeWeight(8);
   var cx = width/2;
   var cy = height/2;
-  var r = 449;
-  for (var x = 0; x < width; x+= detail) {
-    for (var y = 0; y < height; y+= detail) {
-      var d = dist(x, y, cx, cy);
+	var r = min(height/2, width/2);
+	push();
+	translate(width/2, height/2);
+  for (var x = -width/2; x < width/2; x+= detail) {
+    for (var y = -width/2; y < height/2; y+= detail) {
+      var d = dist(x, y, 0, 0);
       if (d<r) {
 				if(mouseX == 0 && mouseY == 0){
 					mx = .00012;
@@ -36,8 +38,16 @@ function draw() {
       }
     }
   }
+	pop();
 	noStroke();
 	fill(1);
 	textSize(26);
 	text("speed: " + nf(mx*10000, 1,1), width-150, 50);
+
+/* crosshair
+	stroke(255);
+	strokeWeight(1);
+	line(width/2, 0, width/2, height);
+	line(0, height/2,width,  height/2);
+*/
 }
