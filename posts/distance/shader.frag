@@ -38,7 +38,7 @@ void main() {
     vec2 uv = gl_FragCoord.xy / u_resolution.xy;
     vec2 c = vec2(.5,.5);
     float d = distance(uv,c)*5.;
-    d = mod(d*d*(1000.+u_time),1.);
+    d = mod(d*d*(100.+u_time),1.);
 
     vec3 hsbColor = vec3(1.-d, 1., abs(.5-d)*2.);
     gl_FragColor = vec4(hsb2rgb(hsbColor),1.);
