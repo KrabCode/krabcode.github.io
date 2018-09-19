@@ -1,9 +1,8 @@
 // Author: Krab
 // Title: Distance Squared
 
-#ifdef GL_ES
-precision mediump float;
-#endif
+precision lowp float;
+
 #define PI 3.14159
 uniform vec2 u_resolution;
 uniform vec2 u_mouse;
