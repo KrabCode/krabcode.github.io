@@ -42,7 +42,7 @@ void main(void) {
   vec3 daysky = vec3(0.353,0.409,0.975);
   vec3 nitesky = vec3(0.114,0.132,0.315);
   vec3 dayground = vec3(0.521,0.975,0.310);
-  vec3 niteground = vec3(0.75, 0.55, 0.09));
+  vec3 niteground = vec3(0.75, 0.55, 0.09);
   vec3 clr = mix(daysky, nitesky, sin(pi*-.5+t));
   if(ellipse(uv, ec, s.x)){
     clr = vec3(1.000,0.887,0.116);
