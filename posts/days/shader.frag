@@ -4,7 +4,6 @@
 #ifdef GL_ES
 precision mediump float;
 #endif
-
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 precision highp float;
 #else
@@ -12,20 +11,7 @@ precision mediump float;
 #endif
 
 uniform vec2 u_resolution;
-
 uniform float u_time;
-
-//  Function from Iigo Quiles
-//  https://www.shadertoy.com/view/MsS3Wc
-vec3 hsb2rgb( in vec3 c ){
-    vec3 rgb = clamp(abs(mod(c.x*6.0+vec3(0.0,4.0,2.0),
-                             6.0)-3.0)-1.0,
-                     0.0,
-                     1.0 );
-    rgb = rgb*rgb*(3.0-2.0*rgb);
-    return c.z * mix(vec3(1.0), rgb, c.y);
-}
-
 
 bool rect(vec2 uv, vec2 c, vec2 s){
 	if(uv.x > c.x-s.x
@@ -42,7 +28,7 @@ bool ellipse(vec2 uv, vec2 c, float r){
 }
 
 bool moon(vec2 uv, vec2 c, vec2 r, float t){
-	return ellipse(uv,c,r.x) && !ellipse(uv,vec2(c.x+r.x*2.*sin(t), c.y), r.x);
+	return ellipse(uv,c,r.x) && !ellipse(uv,vec2(c.x+r.x*2.*sin(t/26.), c.y), r.x);
 }
 
 void main(void) {
@@ -53,10 +39,11 @@ void main(void) {
   vec2 rc = vec2(.5+.4*sin(float(t)+pi), .5+.4*cos(float(t)+pi));
   vec2 fc = vec2(.5, 0.);
   vec2 s = vec2(0.080,-0.010);
-  vec3 day = vec3(0.353,0.409,0.975);
-  vec3 nite = vec3(0.114,0.132,0.315);
-  vec3 clr = mix(day, nite, sin(pi*-.5+t));
-
+  vec3 daysky = vec3(0.353,0.409,0.975);
+  vec3 nitesky = vec3(0.114,0.132,0.315);
+  vec3 dayground = vec3(0.521,0.975,0.310);
+  vec3 niteground = vec3(0.75, 0.55, 0.09));
+  vec3 clr = mix(daysky, nitesky, sin(pi*-.5+t));
   if(ellipse(uv, ec, s.x)){
     clr = vec3(1.000,0.887,0.116);
   }
@@ -70,7 +57,7 @@ void main(void) {
     }
   }
   if(rect(uv, fc, vec2(0.690,0.270))){
-      clr = vec3(0.521,0.975,0.310);
+      clr = mix(dayground, niteground, sin(pi*-.5+t));
   }
   gl_FragColor = vec4(clr,1.0);
 }
