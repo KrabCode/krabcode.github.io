@@ -35,17 +35,19 @@ vec3 hsb2rgb( in vec3 c ){
 void main(void) {
  float t = u_time;
  vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+ uv*= 3.;
+ uv = fract(uv);
  vec2 c = vec2(.5,.5);
- vec2 s = vec2(.19,.19);
+ vec2 s = vec2(.15,.15);
  float d = abs(.5-uv.x) + abs(.5-uv.y); //distance(uv,c);
- vec3 color = vec3(uv, 1.);
- if(d < .35){
-   float spd = 20.;
-   if(rect(uv, c, s) && mod(d-t/spd,.02)<.01){
-     color = vec3(abs(.005-mod(d-t/spd,.01))*10.);
+ vec3 color = vec3(0.);
+ if(d < .5){
+   float spd = 100.;
+   if(rect(uv, c, s)){
+     color = vec3(1.-abs(.5-map(mod(d+t/spd,.03), .0, .015, 0., 1.)));
    }
-   if(!rect(uv, c, s) && mod(d+t/spd,.02)<.01){
-     color = vec3(abs(.005-mod(d+t/spd,.01))*10.);
+   if(!rect(uv, c, s)){
+     color = vec3(1.-abs(.5-map(mod(d-t/spd,.03), .0, .015, 0., 1.)));
    }
  }
  gl_FragColor = vec4(color,1.);
