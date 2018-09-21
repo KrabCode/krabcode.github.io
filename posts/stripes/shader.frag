@@ -37,7 +37,7 @@ void main(void) {
  vec2 uv = gl_FragCoord.xy / u_resolution.xy;
  vec2 c = vec2(.5,.5);
  vec2 s = vec2(.19,.19);
- float d = distance(uv,c);
+ float d = abs(.5-uv.x) + abs(.5-uv.y); //distance(uv,c);
  vec3 color = vec3(uv, 1.);
  if(d < .35){
    float spd = 20.;
