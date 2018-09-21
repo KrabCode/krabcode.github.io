@@ -4,7 +4,6 @@
 #ifdef GL_ES
 precision mediump float;
 #endif
-
 #ifdef GL_FRAGMENT_PRECISION_HIGH
 precision highp float;
 #else
@@ -21,10 +20,8 @@ uniform vec2 u_resolution;
 uniform float u_time;
 
 bool rect(vec2 uv, vec2 c, vec2 s){
-  return (uv.x > c.x-s.x
-  	   && uv.x < c.x+s.x
-    	 && uv.y < c.y+s.y
-    	 && uv.y > c.y-s.y);
+  return (uv.x > c.x-s.x && uv.x < c.x+s.x
+    	 && uv.y < c.y+s.y && uv.y > c.y-s.y);
 }
 
 bool ellipse(vec2 uv, vec2 c, float r){
