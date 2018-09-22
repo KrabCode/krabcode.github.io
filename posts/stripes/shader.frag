@@ -12,8 +12,8 @@ uniform vec2 u_mouse;
 uniform float u_time;
 
 #define pi 3.14159265359
-#define inA vec3(0.36, 0.51, 0.83)
-#define inB vec3(0.04, 0.12, 0.22)
+#define inA vec3(0.0, 0.0, 0.0)
+#define inB vec3(1.0, 1.0, 1.0)
 
 bool rect(vec2 uv, vec2 c, vec2 s){
   return (uv.x > c.x-s.x && uv.x < c.x+s.x && uv.y < c.y+s.y && uv.y > c.y-s.y);
@@ -39,16 +39,17 @@ void main(void) {
  uv*= 1.;
  uv = fract(uv);
  vec2 c = vec2(.5,.5);
- vec2 s = vec2(.2,.2);
+ vec2 s = vec2(.16,.16);
  float d = abs(.5-uv.x) + abs(.5-uv.y); //distance(uv,c);
+ float r = distance(uv,c);
  vec3 color = vec3(0.);
- if(d < .5){
+ if(d < .4){
    float spd = 10.;
-   if(rect(uv, c, s)){
-     color = vec3(mix(inA, inB, 1.-abs(.5-map(mod(d+t/spd,.03), .0, .015, 0., 1.))));
+   if(r<s.x){
+     color = vec3(mix(inA, inB, abs(1.-map(mod(d+t/spd,.04), .0, .05, 0., 2.))));
    }
-   if(!rect(uv, c, s)){
-     color = vec3(mix(inA, inB,1.-abs(.5-map(mod(d-t/spd,.03), .0, .015, 0., 1.))));
+   if(r>=s.x){
+     color = vec3(mix(inA, inB, abs(1.-map(mod(d-t/spd,.04), .0, .05, 0., 2.))));
    }
  }
  gl_FragColor = vec4(color,1.);
