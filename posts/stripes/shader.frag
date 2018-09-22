@@ -43,7 +43,7 @@ void main(void) {
  float d = abs(.5-uv.x) + abs(.5-uv.y); //distance(uv,c);
  vec3 color = vec3(0.);
  if(d < .5){
-   float spd = 100.;
+   float spd = 10.;
    if(rect(uv, c, s)){
      color = vec3(mix(inA, inB, 1.-abs(.5-map(mod(d+t/spd,.03), .0, .015, 0., 1.))));
    }
