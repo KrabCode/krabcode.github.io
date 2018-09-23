@@ -64,7 +64,7 @@ vec3 shape(vec2 st, int N, float scl, float smth, float rt){
    float scl = 3.;
    color.rg += max(.0,.2-smoothstep(f,f+8.2,r));
    color.rg += shape(uv, N, scl, 5.4+.4*(1.+.5*sin(t)),-.3).rg;
-   color.rg -= 2.*ellipse(uv, c, .15).rg;
+   color.rgb -= 1.8*ellipse(uv, c, .15).rgb;
 
    gl_FragColor = vec4(color,1.);
  }
