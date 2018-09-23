@@ -21,8 +21,9 @@ float map(float x, float a1, float a2, float b1, float b2){
   return b1 + (b2-b1) * (x-a1) / (a2-a1);
 }
 
-bool ellipse(vec2 uv, vec2 c, float r){
-	return distance(uv,c)<r;
+float ellipse(vec2 uv, vec2 c, float r){
+  float d = distance(uv,c);
+  return 1.-smoothstep(r, r+0.05, d);
 }
 
 vec3 hsb2rgb( in vec3 c ){
@@ -35,11 +36,20 @@ vec3 hsb2rgb( in vec3 c ){
    vec2 uv = gl_FragCoord.xy / u_resolution.xy;
    vec2 c = vec2(.5,.5);
    float d = distance(uv,c);
-   float r = map(sin(t), -1., 1., .32, .35);
-   if(d < r){
-     uv.x = 1.-uv.y;
-     uv.y = 1.-uv.x;
-   }
-   vec3 color = (vec3(uv.x, .0, uv.y));
+   vec3 color = vec3(uv.x, 0., uv.y);
+   vec2 pos = vec2(0.5)-uv;
+
+   float r = length(pos)*1.0;
+   float a = atan(pos.y,pos.x);
+
+   float f = cos(a*24.+u_time);
+    // f = abs(cos(a*3.));
+    // f = abs(cos(a*2.5))*.5+.3;
+    // f = abs(cos(a*12.)*sin(a*3.))*.8+.1;
+    // f = smoothstep(-.5,1., cos(a*10.))*0.2+0.5;
+
+   color.rg += max(.0,.2-smoothstep(f,f+3.,r));
+   color.rg += ellipse(uv, c, .2);
+
    gl_FragColor = vec4(color,1.);
  }
