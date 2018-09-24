@@ -19,8 +19,9 @@ vec3 hsb2rgb( in vec3 c){
 }
 
 vec3 rect(vec2 uv, vec2 c, vec2 s, vec2 off){
-  return vec3(1.-max(smoothstep(c.x+s.x,c.x+s.x+off.x, uv.x), smoothstep(c.y+s.y,c.y+s.y+off.y,uv.y)));
-  	//uv.x > c.x-s.x && uv.x < c.x+s.x && uv.y < c.y+s.y && uv.y > c.y-s.y);
+  float p = max(smoothstep(c.x+s.x,c.x+s.x+off.x, uv.x), smoothstep(c.y+s.y,c.y+s.y+off.y,uv.y));
+  float q = max(smoothstep(c.x-s.x,c.x-s.x-off.x, uv.x), smoothstep(c.y-s.y,c.y-s.y-off.y,uv.y));
+  return vec3(1.-max(p,q));
 }
 
 float map(float x, float a1, float a2, float b1, float b2){
