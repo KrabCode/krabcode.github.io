@@ -19,8 +19,10 @@ vec3 hsb2rgb( in vec3 c){
 }
 
 vec3 rect(vec2 uv, vec2 c, vec2 s, vec2 off){
-  float p = max(smoothstep(c.x+s.x,c.x+s.x+off.x, uv.x), smoothstep(c.y+s.y,c.y+s.y+off.y,uv.y));
-  float q = max(smoothstep(c.x-s.x,c.x-s.x-off.x, uv.x), smoothstep(c.y-s.y,c.y-s.y-off.y,uv.y));
+  float p = max(smoothstep(c.x+s.x,c.x+s.x+off.x, uv.x),
+                smoothstep(c.y+s.y,c.y+s.y+off.y,uv.y));
+  float q = max(smoothstep(c.x-s.x,c.x-s.x-off.x, uv.x),
+                smoothstep(c.y-s.y,c.y-s.y-off.y,uv.y));
   return vec3(1.-max(p,q));
 }
 
@@ -37,7 +39,7 @@ vec3 shape(vec2 st, int N, float scl, float smth, float rt){
   // Remap the space to -1. to 1.
   st = st *2.-1.;
   // Angle and radius from the current pixel
-  float a = atan(st.x,st.y)+pi-u_time*rt;
+  float a = atan(st.x,st.y)+pi+rt;
   float r = pi*2./float(N);
   // Shaping function that modulate the distance
   float d = cos(floor(.5+a/r)*r-a)*length(st*2.)*scl;
@@ -47,16 +49,23 @@ vec3 shape(vec2 st, int N, float scl, float smth, float rt){
  void main(void) {
    float t = u_time;
    vec2 uv = gl_FragCoord.xy / u_resolution.xy;
-   vec2 c = vec2(.5,.5);
-   float d = distance(uv,c);
-   vec3 color = vec3(.6-uv.x, 0.0 ,.6-uv.y);
+   vec3 topColor = vec3(0.65, 0.03, 0.03);
+   vec3 bottomColor = vec3(0.0, 0.02, 0.33);
+   vec3 color = vec3(mix(bottomColor, topColor, uv.y));
    vec2 pos = vec2(0.5)-uv;
    float r = length(pos)*1.0;
    float a = atan(pos.y,pos.x);
-   float f = cos(a*20.+u_time*-2.0);
-   int N = 5;
-   color.rg += max(.0,.15-smoothstep(f,f+8.2,r));
-   color.rg +=      shape(uv, N, 3.5, 3.,.1).rg;
-   color.rgb -= 1.8*shape(uv, N, 5. , 2.,.1).rgb;
+   float f = cos(a*20.+t);
+   vec3 seaRect =  rect(uv, vec2(.5,.0), vec2(.5, .30),vec2(.08));
+   float dcx = abs(.5-uv.x);
+
+   //sun shine
+   color.rg +=  0.8*shape(uv, 5, 3.5, 5.5,.15*t).rg;
+   //black hole inside
+   color.rgb += -1.5*shape(uv, 5, 3.2 , 0.9,.15*t).rgb;
+   //rays all around
+   color.rg +=  max(.0,.15-smoothstep(f,f+7.+sin(t),r));
+   //sea and sun rg loss with distance from middle
+   color.rg += -1.2*dcx*1.2*seaRect.rg;   
    gl_FragColor = vec4(color,1.);
  }
