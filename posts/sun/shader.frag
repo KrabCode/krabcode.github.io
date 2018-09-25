@@ -49,24 +49,17 @@ vec3 shape(vec2 st, int N, float scl, float smth, float rt){
  void main(void) {
    float t = u_time;
    vec2 uv = gl_FragCoord.xy / u_resolution.xy;
-   vec3 topColor = vec3(0.65, 0.03, 0.03);
-   vec3 bottomColor = vec3(0.0, 0.02, 0.33);
-   vec3 color = vec3(mix(bottomColor, topColor, uv.y));
+   vec2 c = vec2(.5,.5);
+   float d = distance(uv,c);
+   vec3 color = vec3(uv.x, 0., uv.y);
    vec2 pos = vec2(0.5)-uv;
    float r = length(pos)*1.0;
    float a = atan(pos.y,pos.x);
-   float f = cos(a*20.+t);
-   vec3 seaRect =  rect(uv, vec2(.5,.0), vec2(.5, .30),vec2(.08));
-   float dcx = abs(.5-uv.x);
-
-   //sun shine
-   color.rg +=  0.8*shape(uv, 5, 3.5, 5.5,.15*t).rg;
-   //black hole inside
-   color.rgb += -1.5*shape(uv, 5, 3.2 , 0.9,.15*t).rgb;
-   //rays all around
-   color.rg +=  max(.0,.15-smoothstep(f,f+7.+sin(t),r));
-   //sea and sun rg loss with distance from middle
-   color.rg += -1.2*dcx*1.2*seaRect.rg;
-   color += .05;
+   float f = cos(a*20.-u_time*1.);
+   int N = 5;
+   float scl = 5.;
+   color.rg += max(.0,.15-smoothstep(f,f+8.,r));
+   color.rg += shape(uv, N, scl, 6.,-t/8.).rg;
+   color.rgb -= 1.7*shape(uv, N, scl, 2.,-t/8.).rgb;
    gl_FragColor = vec4(color,1.);
  }
