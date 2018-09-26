@@ -44,20 +44,15 @@ vec3 shape(vec2 st, int N, float scl, float smth, float rot){
   return vec3(1.0-smoothstep(r,r+smth,d));
 }
 
-void main(void) {
+ void main(void) {
    float t = u_time;
    vec2 uv = gl_FragCoord.xy / u_resolution.xy;
-   uv.y -= .1;
-   float d = distance(uv,vec2(.5,.5));
-   vec3 color = vec3(.0);
+   vec2 c = vec2(.5,.5);
+   float d = distance(uv,c);
+   vec3 color = vec3(0., .1-uv.y, .3-uv.y*1.);
    vec2 pos = vec2(0.5)-uv;
-   vec3 triangle = shape(uv, 3, .25, 1., 0.);
-   triangle.r *= 1.5;
-   triangle.b = 0.;
-   triangle.rg *= .5+.5*sin(d*60.-t*2.);;
-   vec3 rect = rect(uv, vec2(.5,-.4), vec2(.5, .6),vec2(.2));
-
-   color += triangle;
-   color += vec3(rect.rg*.2, rect.b*.4);
+   vec3 triangle = shape(uv, 3, .4, .5, 0.);
+   triangle *= .5+.5*sin(d*30.-t*2.);
+   color.rg += triangle.rg;
    gl_FragColor = vec4(color,1.);
  }
