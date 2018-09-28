@@ -18,8 +18,10 @@ vec3 hsb2rgb( in vec3 c){
 }
 
 vec3 rect(vec2 uv, vec2 c, vec2 s, vec2 off){
-  float p = max(smoothstep(c.x+s.x,c.x+s.x+off.x, uv.x), smoothstep(c.y+s.y,c.y+s.y+off.y,uv.y));
-  float q = max(smoothstep(c.x-s.x,c.x-s.x-off.x, uv.x), smoothstep(c.y-s.y,c.y-s.y-off.y,uv.y));
+  float p = max(smoothstep(c.x+s.x,c.x+s.x+off.x, uv.x),
+                smoothstep(c.y+s.y,c.y+s.y+off.y,uv.y));
+  float q = max(smoothstep(c.x-s.x,c.x-s.x-off.x, uv.x),
+                smoothstep(c.y-s.y,c.y-s.y-off.y,uv.y));
   return vec3(1.-max(p,q));
 }
 
@@ -55,18 +57,17 @@ float dist(vec2 uv, vec2 c){
 	return distance(uv,c);
 }
 
- void main(void) {
-   float t = u_time;
-   vec2 uv = gl_FragCoord.xy / u_resolution.xy;
-   vec2 c = vec2(.5);
-   float d0 = dist(uv, c);
-   float d1 = maxrect(uv, c);
-   float d2 = minrect(uv, c);
-   vec3 color = vec3(0.,0.,1.);
-   float v = .5+.5*sin(d0/d1/d0/d1+20.+(t*8.));
-   color.r = 1.;
-   color.g = 0.;
-   color.b -= d0+v;
-
-   gl_FragColor = vec4(hsb2rgb(color),1.);
- }
+void main(void) {
+ float t = u_time;
+ vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+ vec2 c = vec2(.5);
+ float d0 = dist(uv, c);
+ float d1 = maxrect(uv, c);
+ float d2 = minrect(uv, c);
+ vec3 color = vec3(0.,0.,0.);
+ float v = .5+.5*sin(d2/d1/d0*.8+(t*1.5));
+ color.r = map(d0/2.+t/30., 0., 0.5, .0, 1.);
+ color.g = 1.0-d0*0.5;
+ color.b = 0.6-d0*2.0+v;
+ gl_FragColor = vec4(hsb2rgb(color),1.);
+}

@@ -63,9 +63,9 @@ float dist(vec2 uv, vec2 c){
    float d1 = maxrect(uv, c);
    float d2 = minrect(uv, c);
    vec3 color = vec3(0.,0.,1.);
-   float v = .5+.5*sin(d0/d1/d0/d1+(t));
-   color.r = .5;
-   color.g = fract(+t/2.+d2/10.*200.);
+   float v = .5+.5*sin(d0/d1/d0/d1+20.+(t*8.));
+   color.r = 1.;
+   color.g = 0.;
    color.b -= d0+v;
 
    gl_FragColor = vec4(hsb2rgb(color),1.);
