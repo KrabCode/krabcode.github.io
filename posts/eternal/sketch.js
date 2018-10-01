@@ -7,10 +7,6 @@ function setup() {
 	rectMode(CENTER);
 }
 
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
-
 function draw() {
 	background(255, 162, 56);
 	drawRect(25,15, 0);
