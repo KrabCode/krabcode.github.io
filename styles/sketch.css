@@ -4,15 +4,19 @@ html, body {
 header{
 	position: absolute;
     left: 50px;
-	top: 0px;
+	  top: 0px;
     width: 200px;
     height: 200px;
-	font-size: 40px;
+    font-size: 20px;
+}
+p{
+font-size: 40px;
 }
 body {
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
   background-color: black;
 }
