@@ -1,4 +1,4 @@
-var cx, cy, side, t, sizeStep, timeStep, genCount;
+var cx, cy, side, t, sizeStep, timeStep, genCount, input;
 
 function setup() {
 	createCanvas(800,800);
@@ -6,6 +6,7 @@ function setup() {
   noFill();
   rectMode(CENTER);
   colorMode(HSB, 360,100,100,100);
+	input = 0;
 }
 
 function draw() {
@@ -13,7 +14,10 @@ function draw() {
   background(0);
   cx = width/2;
   cy = height/2;
-  t = radians(frameCount*1.2);
+	if(mouseIsPressed){
+		input += pmouseX - mouseX;
+	}
+  t = radians(frameCount+input*.3);
   side = min(width, height);
   timeStep = map(sin(t/150), -1,1, -PI, PI);
   sizeStep = map(sin(t/50), -1,1, 1, 2);
