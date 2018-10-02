@@ -1,4 +1,4 @@
-var maxGen = 100;
+var maxGen = 400;
 
 
 function setup() {
@@ -14,18 +14,16 @@ function draw() {
 }
 
 function recursive( gen ){
-    if(gen > maxGen) return;
-    var t = .4+.2*sin(frameCount/500);
-    var m = gen*t;
-    var c = gen*2;
-    var x = (width/4-c)*(sin(t+m));
-    var y = (width/4-c)*(cos(t-m));
-    //fill(map(gen, 0, maxGen, 0, 1), 1,1, .5f);
-    noFill();
-    stroke(1,0,1);
-    strokeWeight(2);
-    point(x,y);
-    recursive(++gen);
+		if(gen > maxGen) return;
+		var t = frameCount/1000;
+		var m = gen*t;
+		var c = gen/2;
+		var x = (width/4-c)*(sin(t+m));
+		var y = (width/4-c)*(cos(t-m));
+		stroke(1);
+		strokeWeight(1);
+		point(x,y);
+		recursive(++gen);
 }
 
 function backgroundGradient(){
