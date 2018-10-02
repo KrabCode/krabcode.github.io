@@ -2,7 +2,7 @@ var cx, cy, side, t, sizeStep, timeStep, genCount;
 
 function setup() {
 	createCanvas(800,800);
-	strokeWeight(1);
+	strokeWeight(3);
   noFill();
   rectMode(CENTER);
   colorMode(HSB, 360,100,100,100);
@@ -18,14 +18,13 @@ function draw() {
   timeStep = map(sin(t/150), -1,1, -PI, PI);
   sizeStep = map(sin(t/50), -1,1, 1, 2);
   drawRect(sizeStep, sizeStep, 0);
-
 }
 
 function drawRect(sizeX, sizeY, gen){
    if(gen > genCount){
     return;
    }
-   var b = 100-map(gen, 0, genCount, 0, 50);
+   var b = 100-map(gen, 0, genCount, 0, 75);
    stroke(0,0,b);
    var x = cx + side/4*cos(t-gen*timeStep);
    var y = cy + side/4*sin(t-gen*timeStep);
