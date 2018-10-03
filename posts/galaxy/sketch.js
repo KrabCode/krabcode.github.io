@@ -5,8 +5,8 @@ function setup() {
 	createCanvas(800,800);
 	colorMode(HSB,1,1,1,1);
 	rectMode(CENTER);
-	mx = .5;
-	my = .5;
+	mx = .99;
+	my = .98;
 }
 
 function draw() {
