@@ -13,8 +13,8 @@ function draw() {
 		background(0);
     translate(width/2, height/2);
 		if((mouseX>0 || mouseY>0) && mouseIsPressed){
-			mx = map(mouseX, 0, width, 0, 2);
-			my = map(mouseY, 0, height, 0, 2);
+			mx = map(mouseX, 0, width, -1, 1);
+			my = map(mouseY, 0, height,-1, 1);
 		}
     recursive(0);
 }
