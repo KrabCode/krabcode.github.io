@@ -47,7 +47,7 @@ function recursive(generation, spectrum){
 
 function polygon(x, y, radius, npoints) {
   var angle = TWO_PI / npoints;
-	strokeWeight(5);
+	strokeWeight(3);
   beginShape();
   for (var a = 0; a < TWO_PI; a += angle) {
     var sx = x + cos(a) * radius;
