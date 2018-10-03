@@ -45,6 +45,4 @@ function recursive(generation, spectrum){
 			line(-x0, -myAudio, -x1, myAudio);
 		}
 	}
-
-		print(generation);
 }
