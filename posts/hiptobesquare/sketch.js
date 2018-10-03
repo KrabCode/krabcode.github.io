@@ -30,7 +30,7 @@ function drawRect(sizeX, sizeY, gen){
    var b = 100-map(gen, 0, genCount, 0, 75);
    stroke(0,0,b);
 	 var sw = 3-map(gen, 0, genCount, 0, 2);
-	 strokeWeight(3);
+	 strokeWeight(2);
    var x = cx + side/4*cos(t-gen*timeStep);
    var y = cy + side/4*sin(t-gen*timeStep);
    rect(x,y, sizeX, sizeY);
