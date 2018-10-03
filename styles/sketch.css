@@ -2,7 +2,7 @@ html, body {
   height: 100%;
 }
 header{
-	position: absolute;
+	  position: absolute;
     left: 50px;
 	  top: 0px;
     width: 200px;
@@ -22,4 +22,14 @@ body {
 }
 a{
   color: silver;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
 }
