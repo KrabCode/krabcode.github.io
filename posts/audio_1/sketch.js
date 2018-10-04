@@ -7,7 +7,7 @@ var normalizedGeneration;
 var normalizedGenerationNext;
 
 function setup() {
-	side = max(windowWidth, windowHeight);
+	side = min(windowWidth, windowHeight);
 	rectMode(CENTER);
 	colorMode(HSB, 360,100,100,100);
 	createCanvas(side,side);
