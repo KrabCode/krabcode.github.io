@@ -24,7 +24,7 @@ function recursive( gen ){
 		var t = .5+.5*frameCount/5000;
 		var x = (maxGen-gen)*(sin(gen*t*mx));
 		var y = (maxGen-gen)*(cos(gen*t*my));
-		stroke(100,100,50+gen/8);
+		stroke(50+gen/8);
 		strokeWeight(3);
 		point(x,y);
 		recursive(++gen);
