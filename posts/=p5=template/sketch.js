@@ -1,6 +1,5 @@
 function setup() {
-	createCanvas(windowWidth, windowHeight, WEBGL);
-	easycam = new Dw.EasyCam(this._renderer);
+	createCanvas(windowWidth, windowHeight);
 	background(.7);
 }
 
