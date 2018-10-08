@@ -34,5 +34,4 @@ function draw() {
 		}
 		endShape();
 	}
-	var energyOffset = fft.getEnergy("treble")/255*r;
 }
