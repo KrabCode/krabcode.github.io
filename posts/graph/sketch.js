@@ -4,7 +4,7 @@
 		}
 
     var xRange = 100;
-    var yRange = 4.;
+    var yRange = 5.;
 
     var xDetail = 10;
     var yDetail = 10;
@@ -79,10 +79,11 @@
             strokeWeight(plotPointStrokeW);
             stroke(plotPovarStroke);
             point(canvasX, canvasY);
-            if (i%2==0) {
-                // fill(1);
-                // textSize(20);
-                //  text(nf(x,1,1)+", "+nf(y, 1, 1), canvasX+10, canvasY+10);
+            if (i%10==0) {
+                 fill(1);
+								 strokeWeight(1);
+                 textSize(15);
+                 text(nf(x,1,1)+", "+nf(y, 1, 1), canvasX, canvasY);
             }
             if (i > 0) {
                 stroke(plotLineStroke);
