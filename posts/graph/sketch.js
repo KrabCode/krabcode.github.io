@@ -19,7 +19,7 @@
     var plotLineStrokeW = 3;
     var plotPointStrokeW = 2;
 
-    var plotPrecision = 400;
+    var plotPrecision = 600;
 
 
     var sideSmall    = 1080;  // smaller window axis length
