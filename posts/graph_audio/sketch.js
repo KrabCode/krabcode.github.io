@@ -1,4 +1,6 @@
-
+var mic;
+var fft;
+var spectrum;
 		function windowResized() {
 		  resizeCanvas(windowWidth, windowHeight);
 		}
@@ -19,7 +21,7 @@
     var plotLineStrokeW = 3;
     var plotPointStrokeW = 2;
 
-    var plotPrecision = 400;
+    var plotPrecision = 1000;
 
 
     var sideSmall    = 1080;  // smaller window axis length
@@ -27,6 +29,7 @@
     var sideBig      = 1920;  /// biggest window axis length
 
    function setup() {
+
         createCanvas(windowWidth, windowHeight);
         colorMode(HSB, 1, 1, 1, 1);
         rectMode(CENTER);
@@ -35,9 +38,15 @@
         sideBig = max(width, height);
         sideSmall = min(width, height);
         sideSmallest = min(width, height)*2;
+
+		 	 	fft = new p5.FFT();
+		 	 	mic = new p5.AudioIn();
+		 	 	fft.setInput(mic);
+		 	 	mic.start();
     }
 
     function draw() {
+				spectrum = fft.analyze();
         background(0);
         translate(width/2, height/2);
         drawCoordinateGuide();
@@ -49,14 +58,14 @@
          var lastX = 0;
          var lastY = 0;
 
-         var a = map(mouseX, width/2- sideSmallest /2, width/2+ sideSmallest /2, -yRange, yRange);
-         var b = map(mouseY, height/2- sideSmallest /2, height/2+ sideSmallest /2, yRange, -yRange);
+      //   var a = map(mouseX, width/2- sideSmallest /2, width/2+ sideSmallest /2, -yRange, yRange);
+      //   var b = map(mouseY, height/2- sideSmallest /2, height/2+ sideSmallest /2, yRange, -yRange);
+				var modA = .002;
+				var modB = .01;
+				var a = fft.getEnergy("bass", "mid")*modA;
+				var b = fft.getEnergy("mid", "treble")*modB;
 
 
-			  if (mouseX == 0 && mouseY == 0) {
-            a = 10;
-            b = 20;
-        }
 
         //edit eq to be same as y declaration
         var eq ="a = "+nf(a, 1, 2)+"\n"+
