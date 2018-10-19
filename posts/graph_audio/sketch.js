@@ -14,14 +14,14 @@ var spectrum;
     var markerStroke = .75;
     var lineStroke = 1.;
     var plotLineStroke = .8;
-    var plotPovarStroke = 1.;
+    var plotPointStroke = 1.;
 
     var lineStrokeW = 1;
     var markerStrokeW = 2;
     var plotLineStrokeW = 3;
     var plotPointStrokeW = 2;
 
-    var plotPrecision = 1000;
+    var plotPrecision = 512;
 
 
     var sideSmall    = 1080;  // smaller window axis length
@@ -49,7 +49,7 @@ var spectrum;
 				spectrum = fft.analyze();
         background(0);
         translate(width/2, height/2);
-        drawCoordinateGuide();
+        //drawCoordinateGuide();
         plot();
     }
 
@@ -58,22 +58,20 @@ var spectrum;
          var lastX = 0;
          var lastY = 0;
 
-      //   var a = map(mouseX, width/2- sideSmallest /2, width/2+ sideSmallest /2, -yRange, yRange);
-      //   var b = map(mouseY, height/2- sideSmallest /2, height/2+ sideSmallest /2, yRange, -yRange);
-				var modA = .002;
-				var modB = .01;
-				var a = fft.getEnergy("bass", "mid")*modA;
-				var b = fft.getEnergy("mid", "treble")*modB;
+				 var mod = .002;
 
+         var modA = map(mouseX, width/2- sideSmallest /2, width/2+ sideSmallest /2, -yRange*mod, yRange*mod);
+         var modB = map(mouseY, height/2- sideSmallest /2, height/2+ sideSmallest /2, yRange*mod, -yRange*mod);
 
-
+				var a = fft.getEnergy("mid", "treble")*modA;
+				var b = fft.getEnergy("bass")*modB;
         //edit eq to be same as y declaration
         var eq ="a = "+nf(a, 1, 2)+"\n"+
                 "b = "+nf(b, 1, 2)+"\n"+
                 "y = sin(x*a)*cos(x*b)";
         fill(.7);
         textSize(40);
-        text(eq, -sideSmall/2,-sideSmall/4);
+      // text(eq, -sideSmall/2,-sideSmall/4);
 
         for (var i = 0; i < plotPrecision; i++) {
 
@@ -85,16 +83,16 @@ var spectrum;
 
             var canvasX = map(x, -xRange, xRange, -sideSmallest /2, sideSmallest /2);
             var canvasY = map(y, -yRange, yRange, -sideSmallest /2, sideSmallest /2)*-1;
+
             strokeWeight(plotPointStrokeW);
-            stroke(plotPovarStroke);
             point(canvasX, canvasY);
             if (i%2==0) {
                 // fill(1);
                 // textSize(20);
                 //  text(nf(x,1,1)+", "+nf(y, 1, 1), canvasX+10, canvasY+10);
             }
-            if (i > 0) {
-                stroke(plotLineStroke);
+            if (i > 0) { //need to wait one loop for lastX and lastY
+		            stroke(1-map(abs(x), 0, xRange, 0, 1));
                 strokeWeight(plotLineStrokeW);
                 line(canvasX, canvasY, lastX, lastY);
             }
