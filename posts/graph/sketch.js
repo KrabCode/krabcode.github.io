@@ -79,7 +79,7 @@
             strokeWeight(plotPointStrokeW);
             stroke(plotPovarStroke);
             point(canvasX, canvasY);
-            if (i%10==0) {
+            if (i% 70==0) {
                  fill(1);
 								 strokeWeight(1);
                  textSize(15);
