@@ -57,11 +57,12 @@
             a = 10;
             b = 20;
         }
-
+				var t = radians(frameCount);
         //edit eq to be same as y declaration
-        var eq ="a = "+nf(a, 1, 2)+"\n"+
+        var eq ="t = "+nf(t, 1, 2)+"\n"+
+								"a = "+nf(a, 1, 2)+"\n"+
                 "b = "+nf(b, 1, 2)+"\n"+
-                "y = sin(x*a)*cos(x*b)";
+                "y = sin(x*a+t)*cos(x*b+t)";
         fill(.7);
         textSize(40);
         text(eq, -sideSmall/2,-sideSmall/4);
@@ -71,7 +72,7 @@
             var x = map(i, 0, plotPrecision, -xRange, xRange);
 
             // edit y to match eq
-            var y = sin(x*a)*cos(x*b);
+            var y = sin(x*a+t)*cos(x*b+t);
             //
 
             var canvasX = map(x, -xRange, xRange, -sideSmallest /2, sideSmallest /2);
