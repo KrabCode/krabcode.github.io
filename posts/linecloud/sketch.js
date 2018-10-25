@@ -1,43 +1,62 @@
-function setup() {
-	createCanvas(800,800);
-}
+var m;
+var rotPos = 0;
+var rotSpd = 0;
+var rotDamp = .98;
+var tDamp = .9;
 
-var input = 0;
-var scl = 10;
+function setup() {
+	createCanvas(windowWidth, windowHeight);
+  colorMode(HSB, 1, 1, 1, 1);
+}
 
 function draw() {
   background(0);
-	input += pmouseX - mouseX;
-	scl = map(mouseY, 0, height, 8, 12);
+  stroke(1);
   translate(width/2, height/2);
-  stroke(255);
-  fill(255);
-  strokeWeight(1);
-  recursiveMain(0);
+  mouseRotation();
+  var t = frameCount*.05;
+  ring(12, 2, 20, t);
 }
 
-function recursiveMain(i) {
-  var r = i * scl;
-  if (r > min(height,width)/2) {
+function ring(size, freq, res, t) {
+  if (size > height/2 || size < 0) {
     return;
   }
-  recursiveRing(0, i, r);
-  recursiveMain(++i);
+  push();
+  rotate(t);
+  var lastX = 0;
+  var lastY = 0;
+  for (var i = 0; i <= res; i++) {
+    var a = map(i, 0, res, 0, TWO_PI);
+    var x = size*sin(a);
+    var y = size*cos(a);
+    var d = map(dist(x, y, 0, 0), 0, height/2, 0, 1);
+    stroke(1-d);
+    if (i > 0 && i%freq==0) {
+      line(x, y, lastX, lastY);
+    }
+    lastX = x;
+    lastY = y;
+  }
+  pop();
+  ring(size+20, freq, res+freq, -t*tDamp);
 }
 
-function recursiveRing(i, j, r) {
-  if (i>j) {
-    return;
+function mouseRotation() {
+  if (mouseIsPressed) {
+    var a0 = getAngle(width/2, height/2, pmouseX, pmouseY);
+    var a1 = getAngle(width/2, height/2, mouseX, mouseY);
+    var delta = (a1 - a0)/4;
+    //if (abs(delta) > abs(rotSpd))
+    {
+      rotSpd = delta;
+    }
   }
-  var n = map(i, 0, j, 0, TWO_PI);
-  n+= j*10*cos(radians((input+frameCount)/35));
-  n = n%TWO_PI;
-  var x = r*sin(n);
-  var y = r*cos(n);
-	push();
-	translate(x,y);
-	rotate(-n+HALF_PI);
-	line(-scl/2, 0, scl/2, 0);
-	pop();
-  recursiveRing(++i, j, r);
+  rotSpd *= rotDamp;
+  rotPos += rotSpd;
+  rotate(rotPos);
+}
+
+function getAngle(x, y, cx, cy) {
+  return atan2(cy-y, cx-x);
 }
