@@ -40,7 +40,7 @@ function draw() {
         var amp = 200*m.y;
         var t = frameCount/50;
         beginShape();
-        for(var i = 0; i < d; i+=2){
+        for(var i = 0; i < d; i+=3){
             var iN = map(i, 0, d, 0, 1);
             var lineX = lerp(x0,x1,iN);
             var lineY = lerp(y0,y1,iN);
