@@ -1,6 +1,6 @@
 function setup() {
-			  createCanvas(windowWidth, windowHeight);
-	      background(0);
+	createCanvas(windowWidth, windowHeight);
+	background(0);
         ellipseMode(CENTER);
         rectMode(CENTER);
     }
@@ -16,14 +16,13 @@ function setup() {
     function drawRecursively(x , y, size, orientation){
         push();
         if((size < height+height/3 || size < width+width/3) && size > .1){
-						colorMode(HSB);
+	    colorMode(HSB);
             stroke((frameCount/2+size/2)%255,255,255);
             translate(x,y);
             rotate(orientation);
             rect(0,0,size,size);
             pop();
-						strokeWeight(.8);
-
+	    strokeWeight(.8);		
             drawRecursively(x,y, size*inputY, orientation+orientation/inputX);
         }else{
             pop();
