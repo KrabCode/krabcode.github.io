@@ -48,10 +48,10 @@ function squiggle(x0, y0, x1, y1, t) {
   translate(x0, y0);
   rotate(a);
   beginShape();
-  for (var x = 0; x < d; x+=16) {
+  for (var x = 0; x < d; x+=10) {
     var xN = map(x, 0, d, 0, 1);
     var y = 20*sin(xN*freq+t);
-    vertex(x, y);
+    curveVertex(x, y);
   }
   endShape();
   pop();
