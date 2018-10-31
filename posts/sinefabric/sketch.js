@@ -23,7 +23,7 @@ if(!locked){
 
   noFill();
   stroke(255);
-	strokeWeight(1);
+	strokeWeight(2);
   var cols = round(2+abs(m.y)*15);
   for (var colX = 0; colX <= cols; colX++) {
     var canvasX = map(colX, 0, cols, -s/2, s/2);
