@@ -1,5 +1,5 @@
 
-var res = 125;
+var res = 80;
 var s = 450;
 var globalCircleAngleOffset;
 var shapes;
@@ -23,7 +23,7 @@ function draw() {
 		background(0);
 		if(!locked){
 			mx = map(mouseX, 0, width, 0, 1);
-		}		
+		}
 		s = windowHeight/2 - windowHeight*mx;
 		print(mx);
 		translate(width / 2, height / 2);
