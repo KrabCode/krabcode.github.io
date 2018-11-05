@@ -3,10 +3,15 @@ var res = 125;
 var s = 450;
 var globalCircleAngleOffset;
 var shapes;
-
+var locked = false;
+var mx = 0;
+function mouseReleased(){
+	locked = !locked;
+}
 
 function setup() {
 	shapes = new Array();
+	smooth(8);
 	globalCircleAngleOffset = PI + HALF_PI / 2;
 	createCanvas(windowWidth, windowHeight);
 	colorMode(HSB, 360, 100, 100, 100);
@@ -15,17 +20,10 @@ function setup() {
 }
 
 function draw() {
-	background(120);
-}
-
-function settings() {
-		fullScreen(P2D);
-		smooth(8);
-}
-
-function draw() {
 		background(0);
-		var mx = map(mouseX, 0, width, 0, 1);
+		if(!locked){
+			mx = map(mouseX, 0, width, 0, 1);
+		}		
 		s = windowHeight/2 - windowHeight*mx;
 		print(mx);
 		translate(width / 2, height / 2);
