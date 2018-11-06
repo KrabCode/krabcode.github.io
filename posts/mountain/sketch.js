@@ -6,22 +6,31 @@ var shapes;
 var locked = false;
 var mx = 0;
 
+    var rgbBackgroundGradientStart;
+    var rgbBackgroundGradientEnd;
+    var rgbForegroundGradientStart;
+    var rgbForegroundGradientEnd;
+
 function mouseReleased(){
 	locked = !locked;
 }
 
 function setup() {
 	shapes = new Array();
+	rgbBackgroundGradientStart = color    (28, 1, 8);
+  rgbBackgroundGradientEnd   = color    (2, 0, 28);
+  rgbForegroundGradientStart = color    (255, 0, 0);
+  rgbForegroundGradientEnd   = color    (0, 55, 255);
 	smooth(8);
 	globalCircleAngleOffset = PI + HALF_PI / 2;
 	createCanvas(windowWidth, windowHeight);
-	colorMode(HSB, 1,1,1,1);
+	colorMode(RGB, 255);
 	shapes.push(makeHorizontalLine());
 	shapes.push(makeCircle());
 }
 
 function draw() {
-		background(0);
+		drawBackground();
 		if(!locked){
 			mx = map(mouseX, 0, width, 0, 1);
 		}
@@ -34,6 +43,18 @@ function draw() {
 
 }
 
+function drawBackground() {
+        background(0);
+        for(var i = 0; i < height; i++){
+            strokeWeight(1);
+            var iN = map(i, 0, height, 0, 1);
+            var c = lerpColor(rgbBackgroundGradientStart, rgbBackgroundGradientEnd, iN);
+            stroke(c);
+            line(0, i, width, i);
+        }
+    }
+
+
 function drawShape() {
 		beginShape();
 		for (var i = 0; i < res - 1; i++) {
@@ -43,8 +64,8 @@ function drawShape() {
 				var y1 = shapes[1][i].y;
 				var a = atan2(y1-y0, x1-x0);
 				var aN = map(a, -PI, PI, 0, 1);
-        strokeWeight(2);
-        stroke(.5+abs(.5-aN), 1, 1);
+				strokeWeight(2);
+        stroke(lerpColor(rgbForegroundGradientStart, rgbForegroundGradientEnd, abs(.5-aN)*2));
         line(x0, y0, x1, y1);
 		}
 }
