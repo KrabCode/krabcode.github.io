@@ -14,7 +14,7 @@ function setup() {
 	smooth(8);
 	globalCircleAngleOffset = PI + HALF_PI / 2;
 	createCanvas(windowWidth, windowHeight);
-	colorMode(HSB, 360, 100, 100, 100);
+	colorMode(HSB, 1,1,1,1);
 	shapes.push(makeHorizontalLine());
 	shapes.push(makeCircle());
 }
@@ -25,7 +25,6 @@ function draw() {
 			mx = map(mouseX, 0, width, 0, 1);
 		}
 		s = windowHeight/2 - windowHeight*mx;
-		print(mx);
 		translate(width / 2, height / 2);
 		rotate(PI);
 		globalCircleAngleOffset = (PI + HALF_PI / 2) + radians(frameCount / 4);
@@ -41,10 +40,11 @@ function drawShape() {
 				var y0 = shapes[0][i].y;
 				var x1 = shapes[1][i].x;
 				var y1 = shapes[1][i].y;
-
-				strokeWeight(1);
-				stroke(100, 50);
-				line(x0, y0, x1, y1);
+				var a = atan2(y1-y0, x1-x0);
+				var aN = map(a, -PI, PI, 0, 1);
+        strokeWeight(2);
+        stroke(.5+abs(.5-aN), 1, 1);
+        line(x0, y0, x1, y1);
 		}
 }
 
