@@ -5,6 +5,7 @@ var globalCircleAngleOffset;
 var shapes;
 var locked = false;
 var mx = 0;
+
 function mouseReleased(){
 	locked = !locked;
 }
