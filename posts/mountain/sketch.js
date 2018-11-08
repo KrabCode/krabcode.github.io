@@ -34,7 +34,7 @@ function draw() {
 		if(!locked){
 			mx = map(mouseX, 0, width, 0, 1);
 		}
-		s = windowHeight/2 - windowHeight*mx;
+		s = windowHeight*mx;
 		translate(width / 2, height / 2);
 		rotate(PI);
 		globalCircleAngleOffset = (PI + HALF_PI / 2) + radians(frameCount / 4);
