@@ -1,5 +1,5 @@
 // Author: Krab (krabcode.github.com)
-// Title: Sine Pizza
+// Title: Twist
 
 precision highp float;
 
