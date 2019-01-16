@@ -41,6 +41,7 @@ function ballRectCollide(){
 		if(ballPos.y+ballRadius > rectPos.y && ballSpd.y > 0){
 			ballSpd.y *= -1;
 			ballSpd.x += rectSpd.x;
+			ballSpd.x = constrain(ballSpd.x, -rectMaxSpd, rectMaxSpd);
 		}
 	}
 }
