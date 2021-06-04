@@ -1,9 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Example</title>
+    <meta charset="UTF-8">
+    <title>Planet</title>
 </head>
 <body>
-<p>This is an example of a simple HTML page with one paragraph.</p>
+<canvas id="myCanvas" style="width: 100%; height: 100%"></canvas>
 </body>
 </html>
+
+
+<script id="vertex-shader-3d" type="x-shader/x-vertex">
+    attribute vec4 a_position;
+    attribute vec4 a_color;
+    attribute vec3 a_normal;
+
+    uniform float u_index;
+    uniform mat4 u_matrix;
+
+    varying vec4 v_color;
+    varying vec3 v_normal;
+
+    void main() {
+        // Multiply the position by the matrix.
+
+        vec4 pos = u_matrix * a_position;
+
+        gl_Position = pos;
+
+        // Pass the color to the fragment shader.
+        v_color = a_color;
+        // Pass the normal to the fragment shader
+        v_normal = a_normal;
+    }
+</script>
+
+<script id="fragment-shader-3d" type="x-shader/x-fragment">
+    precision mediump float;
+
+    // Passed in from the vertex shader.
+    varying vec4 v_color;
+    varying vec4 v_normal;
+
+    uniform vec4 u_colorMult;
+
+    void main() {
+        gl_FragColor = v_color*u_colorMult;
+    }
+</script>
+
+<script src="https://webglfundamentals.org/webgl/resources/webgl-utils.js"></script>
+<script src="https://webglfundamentals.org/webgl/resources/m4.js"></script>
+<script src="https://webglfundamentals.org/webgl/resources/primitives.js"></script>
+<script src="https://webglfundamentals.org/webgl/resources/chroma.min.js"></script>
+
+<script src="planet.js"></script>
