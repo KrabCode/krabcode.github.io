@@ -33,7 +33,7 @@
         }
 
     </style>
-    <title id="title">Pixel Sorting</title>
+    <title id="title"></title>
 </head>
 
 <body>
@@ -43,6 +43,9 @@
         <input type="file" style="display:none" id="inputUploadImage" name="inputUploadImage" accept="image/*">
         <br>
         <button onclick="pixelSort()">Sort</button>
+        <br>
+        <label>animate <input type="checkbox" id="animateCheckbox"></label>
+
         <br>
         <label id="fps" style="horiz-align: right;"></label>
     </div>
@@ -54,6 +57,7 @@
 <script type="application/javascript">
     let canvas = document.getElementById("canvas");
     let c = canvas.getContext("2d");
+    let animateCheckbox = document.getElementById("animateCheckbox");
     let width, height;
     let image, tempImage;
     image = new Image();
@@ -67,12 +71,15 @@
     }
 
     function animate(time) {
-        pixelSort();
+        if(animateCheckbox.checked) {
+            pixelSort();
+        }
     }
 
     window.onload = function () {
         let input = document.getElementById('inputUploadImage');
         input.addEventListener('change', handleFiles, false);
+        setTitleToFilename();
         requestAnimationFrame(update);
     }
 
