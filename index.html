@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <head>
     <style>
+
         body, html {
             padding: 0;
             margin: 0;
             height: 100%;
-            background-color: hsla(0, 0%, 0%, 1);
+            background-color: hsla(0, 0%, 30%, 1);
         }
 
-        canvas {
-            z-index: -1;
+        #canvas {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
         }
 
         p {
@@ -17,19 +23,28 @@
             background-color: black;
         }
 
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            margin: 10px;
+        }
+
         #controls {
             background-color: hsla(0, 0%, 0%, 0.5);
             color: hsl(0, 0%, 90%);
             position: absolute;
-            padding: 5px;
-        }
-
-        button {
-            height: 30px;
+            padding: 0;
+            margin: 5px;
+            font-size: 20px;
         }
 
         button, input {
-            display: block;
+            background-color: hsla(0, 0%, 30%, 1);
+            color: white;
+            vertical-align: middle;
+            font-size: 20px;
         }
 
     </style>
@@ -38,26 +53,55 @@
 
 <body>
 <div id="container">
-    <div id="controls">
-        <button onclick="document.getElementById('inputUploadImage').click()">Load image</button>
-        <input type="file" style="display:none" id="inputUploadImage" name="inputUploadImage" accept="image/*">
-        <br>
-        <button onclick="pixelSort()">Sort</button>
-        <br>
-        <label>animate <input type="checkbox" id="animateCheckbox"></label>
+    <ul id="controls">
+        <!-- load image -->
+        <li>
+            <button onclick="document.getElementById('inputUploadImage').click()">Load image</button>
+            <input type="file" style="display:none" id="inputUploadImage" name="inputUploadImage" accept="image/*">
+        </li>
 
-        <br>
-        <label id="fps" style="horiz-align: right;"></label>
-    </div>
+        <!-- direction radio -->
+        <li>
+            <label for="up">
+                <input type="radio" name="direction" id="up"/>
+                up
+            </label>
+            <label for="down">
+                <input type="radio" name="direction" id="down" checked/>
+                down
+            </label>
+            <label for="left">
+                <input type="radio" name="direction" id="left"/>
+                left
+            </label>
+            <label for="right">
+                <input type="radio" name="direction" id="right"/>
+                right
+            </label>
+        </li>
 
-    <canvas id="canvas"></canvas>
+        <!-- speed slider -->
+        <li>
+            <label for="sortSpeedSlider">animate</label>
+            <input type="range" id="sortSpeedSlider" name="sortSpeedSlider"
+                   min="0" max="100" value="5">
+        </li>
+
+        <!-- fps-->
+        <li>
+            <label id="fps" style="horiz-align: right;"></label>
+        </li>
+    </ul>
+    <canvas id="canvas">Your browser doesn't support canvas</canvas>
+
 </div>
 <script type="text/javascript" src="https://livejs.com/live.js"></script>
-<script type="text/javascript" src="utils/utils.js"></script>
 <script type="application/javascript">
     let canvas = document.getElementById("canvas");
     let c = canvas.getContext("2d");
-    let animateCheckbox = document.getElementById("animateCheckbox");
+    let imageLoadInput = document.getElementById('inputUploadImage');
+    imageLoadInput.addEventListener('change', handleFiles, false);
+    let speedSlider = document.getElementById("sortSpeedSlider");
     let width, height;
     let image, tempImage;
     image = new Image();
@@ -71,78 +115,85 @@
     }
 
     function animate(time) {
-        if(animateCheckbox.checked) {
-            pixelSort();
-        }
+        pixelSortCanvas();
     }
 
     window.onload = function () {
-        let input = document.getElementById('inputUploadImage');
-        input.addEventListener('change', handleFiles, false);
-        setTitleToFilename();
+
         requestAnimationFrame(update);
     }
 
     function handleFiles(e) {
-        let reader = new FileReader();
         let file = e.target.files[0];
-        // load to image to get it's width/height
-
+        let reader = new FileReader();
         image.onload = function () {
+
             canvas.width = image.width;
             canvas.height = image.height;
             c.drawImage(image, 0, 0);
         }
-        // this is to setup loading the image
         reader.onloadend = function () {
             image.src = reader.result;
         }
-        // this is to read the file
         reader.readAsDataURL(file);
+
+        // reset the input button so that the change event can fire with the same file again
+        imageLoadInput.value = null;
     }
 
-    function pixelSort() {
-        console.log("henlo");
+    function pixelSortCanvas() {
         let imageData = c.getImageData(0, 0, canvas.width, canvas.height);
         let imageDataTemp = c.getImageData(0, 0, canvas.width, canvas.height);
         let pixelSource = imageData.data;
         let pixelTemp = imageDataTemp.data;
-        for (let y = 0; y < canvas.height; y++) {
-            let row = [];
-            for (let x = 0; x < canvas.width; x++) {
-                row.push(getPixel(pixelSource, x, y));
+        let sortSpeed = speedSlider.value / 100;
+        let direction = document.querySelector('input[name="direction"]:checked');
+        if (direction === null) {
+            return;
+        }
+        direction = direction.id;
+        console.log(direction);
+        if (direction === 'left' || direction === 'right') {
+            for (let y = 0; y < canvas.height; y++) {
+                let row = [];
+                for (let x = 0; x < canvas.width; x++) {
+                    row.push(getPixel(pixelSource, x, y));
+                }
+                pixelSortList(row, sortSpeed, direction === 'left');
+                for (let x = 0; x < canvas.width; x++) {
+                    setPixel(pixelTemp, x, y, row[x]);
+                }
             }
-            row.sort((pixelA, pixelB) => {
-                if(Math.random() > 0.1) {
-                    return 0;
-                }
-                let sumA = pixelA[0] + pixelA[1] + pixelA[2];
-                let sumB = pixelB[0] + pixelB[1] + pixelB[2];
-                if(sumA > sumB) {
-                    return 1;
-                }
-                if(sumA < sumB) {
-                    return -1;
-                }
-                return 0;
-            });
+        } else if (direction === 'up' || direction === 'down') {
             for (let x = 0; x < canvas.width; x++) {
-                setPixel(pixelTemp, x, y, row[x]);
+                let col = [];
+                for (let y = 0; y < canvas.height; y++) {
+                    col.push(getPixel(pixelSource, x, y));
+                }
+                pixelSortList(col, sortSpeed, direction === 'up');
+                for (let y = 0; y < canvas.height; y++) {
+                    setPixel(pixelTemp, x, y, col[y]);
+                }
             }
         }
         c.putImageData(imageDataTemp, 0, 0);
     }
 
-    function comparePixels(pixelA, pixelB) {
-        let sumA = pixelA[0] + pixelA[1] + pixelA[2];
-        let sumB = pixelB[0] + pixelB[1] + pixelB[2];
-        if(sumA > sumB) {
-            return 1;
-        }
-        if(sumA < sumB) {
-            return -1;
-        }
-        return 0;
+    function pixelSortList(list, sortSpeed, reverse) {
+        list.sort((pixelA, pixelB) => {
+            if (Math.random() > sortSpeed) {
+                return 0;
+            }
+            let sumA = pixelA[0] + pixelA[1] + pixelA[2];
+            let sumB = pixelB[0] + pixelB[1] + pixelB[2];
+            if (sumA > sumB) {
+                return reverse ? -1 : 1;
+            }
+            if (sumA < sumB) {
+                return reverse ? 1 : -1;
+            }
+            return 0;
+        });
     }
 
     function getPixel(pixels, x, y) {
@@ -157,5 +208,43 @@
         pixels[i + 2] = rgba[2];
         pixels[i + 3] = rgba[3];
     }
+
+
+    let historicalFps = [];
+    let lastLoop = new Date();
+
+    function averageFps() {
+        let thisLoop = new Date();
+        let fps = 1000 / (thisLoop - lastLoop);
+        fps = constrain(fps, 0, 200);
+        lastLoop = thisLoop;
+        let averagingRange = 120;
+        historicalFps.push(fps);
+        if (historicalFps.length > averagingRange) {
+            historicalFps.shift();
+        }
+        let sum = 0;
+        historicalFps.forEach((item) => {
+            sum += item;
+        });
+        let avg = sum / historicalFps.length;
+        return Math.round(avg) + " fps";
+    }
+
+    // https://stackoverflow.com/questions/45070033/replace-html-title-with-file-name
+    function setTitleToFilename() {
+        let url = window.location.pathname; // gets the pathname of the file
+        let str = url.substring(url.lastIndexOf('/') + 1); // removes everything before the filename
+        str = str.substring(0, str.length - 5); // removes the extension
+        // if the filename has multiple words separated by spaces, browsers do not like that and replace each space with a %20. This replaces %20 with a space.
+        document.getElementById("title").innerHTML = str.replace(/%20/g, " ");
+    }
+
+    function constrain(x, min, max) {
+        x = Math.max(x, min);
+        x = Math.min(x, max);
+        return x;
+    }
+
 </script>
 </body>
